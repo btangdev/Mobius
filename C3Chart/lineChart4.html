@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./libs/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="./src/css/line.css">
+    <script src="./libs/jquery.js"></script>
+    <script src="./libs/semantic.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" type="text/css" />
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+    <title>C3 Chart</title>
+    <style>
+        .c3-line {stroke-width: 2;}
+    </style>
+</head>
+<body id="guide">
+    <div class="pusher">
+        <div class="full height">
+            <!-- sidebar -->
+            <div class="toc">
+                <div class="ui visible inverted sidebar vertical menu">
+                    <div class="item">
+                        <a class="ui logo icon image" href="/">
+                            <img src="./src/image/team_logo.gif" alt="jobkorea uit">
+                        </a>
+                    </div>
+                    <a href="./chart.html" class="item">Line Chart <i class="line chart icon"></i></a>
+                    <a href="" class="item" onClick="alert('준비중입니다.');">Bar Chart <i class="bar chart icon"></i></a>
+                    <a href="" class="item" onClick="alert('준비중입니다.');">Pie Chart <i class="pie chart icon"></i></a>
+                    <a href="" class="item" onClick="alert('준비중입니다.');">Composite Chart <i class="area chart icon"></i></a>
+                    <div class="item">
+                        <div class="header">C3 reference</div>
+                        <div class="menu">
+                            <a href="http://c3js.org/reference.html" class="item">Reference<i class="linkify icon"></i></a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="header">D3 & Link</div>
+                        <div class="menu">
+                            <a href="https://d3js.org/" class="item">D3<i class="linkify icon"></i></a>
+                            <a href="https://github.com/zziuni/d3/wiki/API-Reference" class="item">D3 한글 API<i class="linkify icon"></i></a>
+                            <a href="https://bl.ocks.org/mbostock/3885304" class="item">Mike Bostock의 그래프<i class="linkify icon"></i></a>
+                            <a href="https://keithpblog.wordpress.com/2016/07/31/upgrading-d3-from-v3-to-v4/" class="item">upgrading d3 from v3 to v4<i class="linkify icon"></i></a>
+                            <a href="http://www.d3noob.org/2013/01/adding-grid-lines-to-d3js-graph.html" class="item">grid-lines<i class="linkify icon"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- content -->
+            <div class="article">
+                <h1 class="ui header">Line Chart</h1>
+                <div class="sub header">jobkorea line chart style guide</div>
+
+                <div class="ui grid">
+
+                    <!-- SVG & DATA setting -->
+                    <div class="four wide column inputForm">
+                        <p>SVG & DATA setting</p>
+                        <!-- svg size -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">width</div>
+                                <input class="svgWidth" placeholder="SVG WIDTH" type="text">
+                            </div>
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">height</div>
+                                <input class="svgHeight" placeholder="SVG HEIGHT" type="text">
+                            </div>
+                        </div>
+                        <!-- svgBackgroundColor -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">svg 배경컬러</div>
+                                <input class="svgBackgroundColor" placeholder="svgBackgroundColor" type="text">
+                            </div>
+                        </div>
+                        <!-- X Data & Y Data -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">X축 데이터</div>
+                                <input class="data" placeholder="X축 데이터 값: A, B, C, D..." type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y축 데이터 1</div>
+                                <input class="yAxis_0" placeholder="Y축 데이터 값: 100, 200, 300, 400..." type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y축 데이터 2</div>
+                                <input class="yAxis_1" placeholder="Y축 데이터 값: 100, 200, 300, 400..." type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y축 데이터 3</div>
+                                <input class="yAxis_2" placeholder="Y축 데이터 값: 100, 200, 300, 400..." type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y축 데이터 4</div>
+                                <input class="yAxis_3" placeholder="Y축 데이터 값: 100, 200, 300, 400..." type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y축 데이터 5</div>
+                                <input class="yAxis_4" placeholder="Y축 데이터 값: 100, 200, 300, 400..." type="text">
+                            </div>
+                        </div>
+
+                        <!-- Data label position -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">데이터 Y좌표(+)</div>
+                                <input class="dataLabel_up" placeholder="그래프 위 패딩 값" type="text">
+                            </div>
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">데이터 Y좌표(-)</div>
+                                <input class="dataLabel_down" placeholder="그래프 아래 패딩 값" type="text">
+                            </div>
+                        </div>
+
+                        <!-- graph type -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">그래프타입</div>
+                                <input class="type" placeholder="그래프타입" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Axis setting -->
+                    <div class="four wide column inputForm">
+                        <p>Axis setting</p>
+                        <!-- Y Axis Count -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y축 데이터 개수</div>
+                                <input class="axis_y_count" placeholder="Y axis Count" type="text">
+                            </div>
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">데이터라벨 상,하 분기</div>
+                                <input class="dataLabelDiv" placeholder="dataLabelDiv" type="text">
+                            </div>
+                        </div>
+                        <!-- Y Axis Max, Min -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y축 Max값</div>
+                                <input class="axis_y_max" placeholder="Y축 Max" type="text">
+                            </div>
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y축 Min값</div>
+                                <input class="axis_y_min" placeholder="Y축 Min" type="text">
+                            </div>
+                        </div>
+                        <!-- axis_y_color, axis_x_color  -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">x축컬러</div>
+                                <input class="axis_x_color" placeholder="x축컬러" type="text">
+                            </div>
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">y축컬러</div>
+                                <input class="axis_y_color" placeholder="y축컬러" type="text">
+                            </div>
+                        </div>
+                        <!-- tick color  -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">X축 tick 컬러</div>
+                                <input class="axis_x_tick_line" placeholder="x tick color" type="text">
+                            </div>
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y축 tick 컬러</div>
+                                <input class="axis_y_tick_line" placeholder="y tick color" type="text">
+                            </div>
+                        </div>
+                        <!-- axis font size & color  -->
+                        <div class="row">
+                            <div class="row ui mini labeled input">
+                                <div class="ui basic label">x axis font-size</div>
+                                <input class="axis_x_font_size" placeholder="x axis font-size" type="text">
+                            </div>
+                            <div class="row ui mini labeled input">
+                                <div class="ui basic label">x axis color</div>
+                                <input class="axis_x_font_color" placeholder="x axis color" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row ui mini labeled input">
+                                <div class="ui basic label">y axis font-size</div>
+                                <input class="axis_y_font_size" placeholder="y axis font-size" type="text">
+                            </div>
+                            <div class="row ui mini labeled input">
+                                <div class="ui basic label">y axis color</div>
+                                <input class="axis_y_font_color" placeholder="y axis color" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row ui mini labeled input">
+                                <div class="ui basic label">axis_x_positionY</div>
+                                <input class="axis_x_positionY" placeholder="axis_x_positionY" type="text">
+                            </div>
+                            <div class="row ui mini labeled input">
+                                <div class="ui basic label">axis_y_positionY</div>
+                                <input class="axis_y_positionY" placeholder="axis_y_positionY" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- X Axis Text Centered -->
+                            <div class="ui checked checkbox">
+                                <input class="axis_x_tick_center" checked="" id="axis_x_tick_center" type="checkbox"><label for="axis_x_tick_center">x축 Center</label>
+                            </div>
+                            <!-- X Axis Grid -->
+                            <div class="ui checked checkbox">
+                                <input class="" id="x_grid" checked="" type="checkbox" name="x_grid"><label for="x_grid">X Axis grid</label>
+                            </div>
+                            <!-- Y Axis Grid -->
+                            <div class="ui checked checkbox">
+                                <input class="" id="y_grid" checked="" type="checkbox" name="y_grid"><label for="y_grid">Y Axis grid</label>
+                            </div>
+                            <!-- x axis outer -->
+                            <div class="ui checkbox">
+                                <input class="axis_x_outer" id="axis_x_outer" type="checkbox"><label for="axis_x_outer">x Axis outer</label>
+                            </div>
+                            <!-- y axis outer -->
+                            <div class="ui checkbox">
+                                <input class="axis_y_outer" id="axis_y_outer" type="checkbox"><label for="axis_y_outer">y Axis outer</label>
+                            </div>
+                            <!-- focusLine -->
+                            <div class="ui checkbox">
+                                <input class="focusLine" id="focusLine" type="checkbox"><label for="focusLine">focusLine</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Graph setting -->
+                    <div class="four wide column inputForm">
+                        <p>Graph setting</p>
+                        <!-- Data label dataLabelColor & dataLabelFontSize -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">데이터 라벨 컬러, 사이즈</div>
+                                <input class="dataLabelColor" placeholder="dataLabelColor" type="text">
+                                &nbsp;&nbsp;<input class="dataLabelFontSize" placeholder="dataLabelFontSize" type="text">
+                            </div>
+                        </div>
+
+                        <!-- pointStrokeColor, pointFillColor  -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">포인터 보더컬러, 컬러</div>
+                                <input class="pointStrokeColor_0" placeholder="포인터 보더컬러" type="text">
+                                &nbsp;&nbsp;<input class="pointFillColor" placeholder="포인터 컬러" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">포인터 보더컬러, 컬러</div>
+                                <input class="pointStrokeColor_1" placeholder="포인터 보더컬러" type="text">
+                                &nbsp;&nbsp;<input class="pointFillColor" placeholder="포인터 컬러" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">포인터 보더컬러, 컬러</div>
+                                <input class="pointStrokeColor_0" placeholder="포인터 보더컬러" type="text">
+                                &nbsp;&nbsp;<input class="pointFillColor" placeholder="포인터 컬러" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">포인터 보더컬러, 컬러</div>
+                                <input class="pointStrokeColor_1" placeholder="포인터 보더컬러" type="text">
+                                &nbsp;&nbsp;<input class="pointFillColor" placeholder="포인터 컬러" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">포인터 보더컬러, 컬러</div>
+                                <input class="pointStrokeColor_1" placeholder="포인터 보더컬러" type="text">
+                                &nbsp;&nbsp;<input class="pointFillColor" placeholder="포인터 컬러" type="text">
+                            </div>
+                        </div>
+
+                        <!-- regions_start, regions_end  -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">regions_start</div>
+                                <input class="regions_start" placeholder="regions_start" type="text">
+                            </div>
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">regions_end</div>
+                                <input class="regions_end" placeholder="regions_end" type="text">
+                            </div>
+                        </div>
+                        <!-- regions_start_2, regions_end_2
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">regions_start_2</div>
+                                <input class="regions_start_2" placeholder="regions_start_2" type="text">
+                            </div>
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">regions_end_2</div>
+                                <input class="regions_end_2" placeholder="regions_end_2" type="text">
+                            </div>
+                        </div>
+                         -->
+                        <!-- colorPattern -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">colorPattern</div>
+                                <input class="colorPattern" placeholder="colorPattern" type="text">
+                            </div>
+                        </div>
+                        <!-- Point Expand & Point Expand Rate -->
+                        <div class="row">
+                            <div class="row">
+                                <div class="ui mini labeled input">
+                                    <div class="ui basic label">포인터 반지름</div>
+                                    <input class="pointRad" placeholder="point radius Default = 4" type="text">
+                                </div>
+                                <div class="ui mini labeled input">
+                                    <div class="ui basic label">포인터 확장 비율</div>
+                                    <input class="pointExpandRate" placeholder="pointExpandRate Default = 1" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- tooltip -->
+                        <div class="row">
+                            <div class="ui checkbox">
+                                <input class="" id="pointExpand" type="checkbox" name="pointExpand"><label for="pointExpand">pointer expand</label>
+                            </div>
+
+                            <!-- <div class="ui mini labeled input">
+                                <div class="ui basic label">tooltip_custom</div>
+                                <input type="text" disabled placeholder="tooltip_custom" class="tooltip_custom">
+                            </div> -->
+                            <div class="ui checkbox">
+                                <input class="" id="tooltip" type="checkbox" name="tooltip"><label for="tooltip">tooltip</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Grid & label setting -->
+                    <div class="four wide column inputForm">
+                        <p>Grid & label setting</p>
+                        <!-- gridLineColor -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">gridLineColor</div>
+                                <input class="gridLineColor" placeholder="gridLineColor" type="text">
+                            </div>
+                        </div>
+                        <!-- format -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">format</div>
+                                <input type="text" placeholder="format" class="format">
+                            </div>
+                        </div>
+                        <!-- rectOddColor -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">rectOddColor</div>
+                                <input type="text" placeholder="rectOddColor" class="rectOddColor">
+                            </div>
+                        </div>
+                        <!-- rectEvenColor -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">rectEvenColor</div>
+                                <input type="text" placeholder="rectEvenColor" class="rectEvenColor">
+                            </div>
+                        </div>
+                        <!-- dasharrayX, dasharrayY -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">dasharrayX</div>
+                                <input class="dasharrayX" placeholder="dasharrayX" type="text">
+                            </div>
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">dasharrayY</div>
+                                <input class="dasharrayY" placeholder="dasharrayY" type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- rectView -->
+                            <div class="ui checkbox">
+                                <input class="" id="rectView" type="checkbox" name="rectView"><label for="rectView">rectView</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui checkbox">
+                                <input class="label" id="label" type="checkbox" name="label"><label for="label">Label Show & hide</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- legend -->
+                            <div class="ui checkbox">
+                                <input class="legend" id="legend" type="checkbox"><label for="legend">legend</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- labelPosition -->
+                            <div class="ui checkbox">
+                                <input class="" id="labelPosition" type="checkbox" name="labelPosition"><label for="labelPosition">labelPosition</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- zeroValue -->
+                            <div class="ui checkbox">
+                                <input class="" id="zeroValue" type="checkbox" name="zeroValue"><label for="zeroValue">zeroValue</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sixteen wide column inputForm buttonBox">
+                        <button type="button" name="button" class="update ui negative button">UPDATE</button>
+                    </div>
+                    <div class="sixteen wide column viewGraph">
+                        <div class="chartBox">
+                            <div class="lineChart"></div>
+                        </div>
+                    </div>
+                    <h2 class='section'>Option</h2>
+                    <div class="row">
+                        <div class="sixteen wide column codeView"></div>
+                    </div>
+                    <h2 class='section'>Usage</h2>
+
+                    <div class="row">
+                        <div class="usage">
+                            <div class="no example">
+                                <h2 class="ui header">Default</h2>
+                                <div class="ui big yellow message">
+                                    <p>$(target).line( {option} );</p>
+                                </div>
+
+                                <h2 class="ui header">options</h2>
+                                <h4 class="ui header">X축 데이터 라벨</h4>
+                                <div>X축 데이터</div>
+                                <div class="ui small message">
+                                    <p>{ 사원, 주임, 대리, 과장, 부장, 차장 }</p>
+                                    <b class="returnValue">String</b>
+                                </div>
+
+                                <h4 class="ui header">Y축 데이터</h4>
+                                <div>Y축 데이터</div>
+                                <div class="ui small message">
+                                    <p>{ 1000, 2000, 3000, 4000, 5000, 6000 }</p>
+                                    <b class="returnValue">Number</b>
+                                </div>
+
+                                <h4 class="ui header">svgWidth, svgHeight</h4>
+                                <div>svg 넓이, svg 높이</div>
+                                <div class="ui small message">
+                                    <p>{ svgWidth: 800, svgHeight: 360 }</p>
+                                    <b class="returnValue">Number</b>
+                                </div>
+
+                                <h4 class="ui header">svgBackgroundColor</h4>
+                                <div>svg 배경컬러</div>
+                                <div class="ui small message">
+                                    <p>{ svgBackgroundColor: "#fff" }</p>
+                                    <b class="returnValue">String</b>
+                                </div>
+
+                                <h4 class="ui header">dataLabelDiv</h4>
+                                <div>데이터라벨 포지션의 기준점. 해당 값을 기준으로 포인터 위, 아래로 라벨값을 출력함.</div>
+                                <div class="ui small message">
+                                    <p>{ dataLabelDiv: 4000 }</p>
+                                    <b class="returnValue">Number</b>
+                                </div>
+
+                                <h4 class="ui header">dataLabel_up, dataLabel_down</h4>
+                                <div>기준점을 중심으로 값이 작으면 <b>dataLabel_up</b>을 사용(라벨을 위로 표시). 값이 크면 <b>dataLabel_down</b>사용(라벨을 아래로 표시)</div>
+                                <div class="ui small message">
+                                    <p>{ dataLabel_up: 25, dataLabel_down: -5 }</p>
+                                    <b class="returnValue">Number</b>
+                                </div>
+
+                                <h4 class="ui header">label</h4>
+                                <div>데이터라벨 show, hide</div>
+                                <div class="ui small message">
+                                    <p>{ label:true }</p>
+                                    <b class="returnValue">Boolean</b>
+                                </div>
+
+                                <h4 class="ui header">pointFillColor</h4>
+                                <div>포인터 내부 컬러</div>
+                                <div class="ui small message">
+                                    <p>{ pointFillColor:"#fff" }</p>
+                                    <b class="returnValue">String</b>
+                                </div>
+
+                                <h4 class="ui header">pointStrokeColor</h4>
+                                <div>포인터 보더 컬러</div>
+                                <div class="ui small message">
+                                    <p>{ pointStrokeColor:"dodgerblue" }</p>
+                                    <b class="returnValue">String</b>
+                                </div>
+
+                                <h4 class="ui header">pointRad</h4>
+                                <div>포인터 반지름</div>
+                                <div class="ui small message">
+                                    <p>{ pointRad:4 }</p>
+                                    <b class="returnValue">Number</b>
+                                </div>
+
+                                <h4 class="ui header">pointExpand</h4>
+                                <div>마우스 오버 이벤트에 포인터 확장 유무</div>
+                                <div class="ui small message">
+                                    <p>{ pointExpand:false }</p>
+                                    <b class="returnValue">Boolean</b>
+                                </div>
+
+                                <h4 class="ui header">pointExpandRate</h4>
+                                <div>포인터가 확장되는 비율. 마우스 오버시 기본값의 1.75배율로 확장</div>
+                                <div class="ui small message">
+                                    <p>{ pointExpandRate:1.75 }</p>
+                                    <b class="returnValue">Number</b>
+                                </div>
+
+                                <h4 class="ui header">colorPattern</h4>
+                                <div>복합적인 그래프의 경우 각각의 그래프 컬러 패턴을 배열로 저장.</div>
+                                <div class="ui small message">
+                                    <p>{ colorPattern:["dodgerblue"] }</p>
+                                    <b class="returnValue">String</b>
+                                </div>
+
+                                <h4 class="ui header">x_grid, y_grid</h4>
+                                <div>그래프 내부의 x,y좌표 그리드</div>
+                                <div class="ui small message">
+                                    <p>{ x_grid:true, y_grid:true }</p>
+                                    <b class="returnValue">Boolean</b>
+                                </div>
+
+                                <h4 class="ui header">dasharrayX, dasharrayY</h4>
+                                <div>그래프 내부 그리드 스타일. 도트로 출력되며, 도트의 길이와 간격으로 조절함.</div>
+                                <div class="ui small message">
+                                    <p>{ dasharrayX:"2 2", dasharrayY:"2 0" }</p>
+                                    <b class="returnValue">Number</b>
+                                </div>
+
+                                <h4 class="ui header">gridLineColor</h4>
+                                <div>그래프 내부 그리드라인의 컬러</div>
+                                <div class="ui small message">
+                                    <p class="">{ gridLineColor:"#eee" }</p>
+                                    <b class="returnValue">String</b>
+                                </div>
+
+                                <h4 class="ui header">legend</h4>
+                                <div>범례 show, hide</div>
+                                <div class="ui small message">
+                                    <p>{ legend:false }</p>
+                                    <b class="returnValue">Boolean</b>
+                                </div>
+
+                                <h4 class="ui header">regions_start, regions_end</h4>
+                                <div>그래프의 특정구간을 점선으로 구분함. 컬러변경(X), 라인스타일변경(X)</div>
+                                <div class="ui small message">
+                                    <p>{ regions_start:1, regions_end:3, regions_start_2:4, regions_end_2:5 }</p>
+                                    <b class="returnValue">Number</b>
+                                </div>
+
+                                <h4 class="ui header">focusLine</h4>
+                                <div>각 구간에 마우스 오버시 X축 데이터를 중심으로 세로 라인을 출력</div>
+                                <div class="ui small message">
+                                    <p>{ focusLine:false }</p>
+                                    <b class="returnValue">Boolean</b>
+                                </div>
+
+                                <h4 class="ui header">axis_x_tick_center</h4>
+                                <div>X축 데이터를 표시선(tick)의 중심에 출력</div>
+                                <div class="ui small message">
+                                    <p>{ axis_x_tick_center:true }</p>
+                                    <b class="returnValue">Boolean</b>
+                                </div>
+
+                                <h4 class="ui header">axis_x_outer, axis_y_outer</h4>
+                                <div>X, Y축의 양 끝의 라인을 제거</div>
+                                <div class="ui small message">
+                                    <p>{ axis_x_outer:true, axis_y_outer:true }</p>
+                                    <b class="returnValue">Boolean</b>
+                                </div>
+
+                                <h4 class="ui header">axis_y_count</h4>
+                                <div>Y축 데이터라벨의 개수</div>
+                                <div class="ui small message">
+                                    <p>{ axis_y_count:6 }</p>
+                                    <b class="returnValue">Number</b>
+                                </div>
+
+                                <h4 class="ui header">axis_y_max, axis_y_min</h4>
+                                <div>y축 최소값과 최대값.</div>
+                                <div class="ui small message">
+                                    <p>{ axis_y_max:8000, axis_y_min:0 }</p>
+                                    <b class="returnValue">Number</b>
+                                </div>
+
+                                <h4 class="ui header">tooltip_custom</h4>
+                                <div>툴팁 커스터마이징.</div>
+                                <div class="ui small message">
+                                    <p>{ tooltip_custom:"&lt;div class='tooltip-custom'&gt;최소 5,000 ~ 최대 10,000이상&lt;br&gt;전년비 &lt;span&gt;6%&lt;/span&gt;&lt;/div&gt;" }</p>
+                                </div>
+
+                                <h4 class="ui header">tooltip</h4>
+                                <div>툴팁</div>
+                                <div class="ui small message">
+                                    <p>{ tooltip: { show: true } }</p>
+                                    <b class="returnValue">Boolean</b>
+                                </div>
+
+                                <h4 class="ui header">dataLabelColor, dataLabelFontSize</h4>
+                                <div>데이터 라벨의 컬러와 폰트 사이즈 조정</div>
+                                <div class="ui small message">
+                                    <p>{ dataLabelColor:"deepblue", dataLabelFontSize:"12px" }</p>
+                                    <b class="returnValue">String, Number</b>
+                                </div>
+
+                                <h4 class="ui header">axis_x_color, axis_y_color</h4>
+                                <div>X, Y축 라인 컬러</div>
+                                <div class="ui small message">
+                                    <p>{ axis_x_color:"#ccc", axis_y_color:"#ddd" }</p>
+                                    <b class="returnValue">String</b>
+                                </div>
+
+                                <h4 class="ui header">axis_x_font_size, axis_x_font_color</h4>
+                                <div>X축 라벨의 컬러와 사이즈</div>
+                                <div class="ui small message">
+                                    <p>{ axis_x_font_size:"12px", axis_x_font_color:"#222" }</p>
+                                    <b class="returnValue">Number, String</b>
+                                </div>
+
+                                <h4 class="ui header">axis_y_font_size, axis_y_font_color</h4>
+                                <div>Y축 라벨의 컬러와 사이즈</div>
+                                <div class="ui small message">
+                                    <p>{ axis_y_font_size:"12px", axis_y_font_color:"#222" }</p>
+                                    <b class="returnValue">Number, String</b>
+                                </div>
+
+                                <h4 class="ui header">axis_x_positionY, axis_y_positionY</h4>
+                                <div>X, Y축 라벨의 Y포지션</div>
+                                <div class="ui small message">
+                                    <p>{ axis_x_positionY: 9, axis_y_positionY: 1 }</p>
+                                    <b class="returnValue">Number</b>
+                                </div>
+
+                                <h4 class="ui header">axis_x_tick_line, axis_y_tick_line</h4>
+                                <div>X, Y축 라벨의 tick 라인의 컬러. 따로 삭제할 수 없으니 배경컬러와 동일하게 조절하면 보이지 않음.</div>
+                                <div class="ui small message">
+                                    <p>{ axis_x_tick_line:"#000", axis_y_tick_line:"#ddd" }</p>
+                                    <b class="returnValue">String</b>
+                                </div>
+
+                                <h4 class="ui header">labelPosition</h4>
+                                <div>기준값을 중심으로 포인터의 상 하로 레이블 출력유무</div>
+                                <div class="ui small message">
+                                    <p>
+                                        <code>
+                                            <pre>
+if ( option.labelPosition ){
+    for ( i; i < $yAxisLabel.length; i++ ){
+        d3.selectAll('.c3-texts-' + $yAxisLabel[i] + ' .c3-text').each(function(d) {
+            if ( d === undefined ) return;
+            d.value > option.dataLabelDiv ? getDataLabelDiv( d, option.dataLabel_up, i ) : getDataLabelDiv( d, option.dataLabel_down, i );
+        });
+    }
+}</pre>
+                                        </code>
+                                    </p>
+                                    <b class="returnValue">Boolean</b>
+                                </div>
+
+                                <h4 class="ui header">format</h4>
+                                <div>C3에서 제공하는 포맷형태가 있지만, Label의 Boolean과 독립적인 옵션으로 제공되지 않기 때문에 새로 작성함.</div>
+                                <div class="ui small message">
+                                    <p>
+                                        <code>
+                                            <pre>
+function getDataLabelVal( d, i ){
+    if ( d.value === 0 ) {
+        $($thisTarget + ' .c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text('');
+    }else{
+        var t =$($thisTarget + ' .c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text();
+        $($thisTarget + ' .c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text(t + option.format);
+    }
+}</pre>
+                                        </code>
+                                    </p>
+                                    <b class="returnValue">String</b>
+                                </div>
+
+                                <h4 class="ui header">zeroValue</h4>
+                                <div>데이터가 0일때 데이터레이블 출력 유무</div>
+                                <div class="ui small message">
+                                    <p>
+                                        <code>
+                                            <pre>
+if ( option.zeroValue ){
+    for ( i; i < $yAxisLabel.length; i++ ){
+        d3.selectAll($thisTarget + ' .c3-texts-' + $yAxisLabel[i] + ' .c3-text').each(function(d) {
+            getDataLabelVal(d, i);
+        });
+    }
+}</pre>
+                                        </code>
+                                    </p>
+                                    <b class="returnValue">Boolean</b>
+                                </div>
+
+                                <h4 class="ui header">rectView</h4>
+                                <div>그래프 배경의 컬러를 홀수, 또는 짝수에 따라 구분컬러를 넣어줄지 선택.</div>
+                                <div class="ui small message">
+                                    <p>
+                                        <code>
+                                            <pre>
+if ( option.rectView ){
+    $($thisTarget).find('.c3-event-rects-single rect').each(function(i){
+        var cls = $(this).attr('class').split(' ');
+        var clsNum = cls[cls.length-1];
+        $($thisTarget).find('.c3-event-rects-single rect:odd').attr('fill',option.rectOddColor);
+        $($thisTarget).find('.c3-event-rects-single rect:even').attr('fill',option.rectEvenColor);
+    });
+}else{
+    $($thisTarget).find('.c3-event-rects-single rect:odd').attr('fill', 'transparent');
+    $($thisTarget).find('.c3-event-rects-single rect:even').attr('fill', 'transparent');
+}</pre>
+                                        </code>
+                                    </p>
+                                    <b class="returnValue">Boolean</b>
+                                </div>
+
+                                <h4 class="ui header">rectOddColor</h4>
+                                <div>그래프 배경의 컬러를 홀수에 넣어줌.</div>
+                                <div class="ui small message">
+                                    <p>
+                                        <code>
+                                            <pre>$($thisTarget).find('.c3-event-rects-single rect:odd').attr('fill',option.rectOddColor);</pre>
+                                        </code>
+                                    </p>
+                                    <b class="returnValue">String</b>
+                                </div>
+
+                                <h4 class="ui header">rectEvenColor</h4>
+                                <div>그래프 배경의 컬러를 짝수에 넣어줌.</div>
+                                <div class="ui small message">
+                                    <p>
+                                        <code>
+                                            <pre>$($thisTarget).find('.c3-event-rects-single rect:even').attr('fill',option.rectEvenColor);</pre>
+                                        </code>
+                                    </p>
+                                    <b class="returnValue">String</b>
+                                </div>
+
+                                <h4 class="ui header">type</h4>
+                                <div>그래프 타입</div>
+                                <div class="ui small message">
+                                    <p>{ type: option.type }</p>
+                                    <b class="returnValue">String</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script type="text/javascript" src="./src/js/line.js"></script> -->
+    <script type="text/javascript" src="./src/js/customLine4.js"></script>
+
+    <!-- change -->
+    <script>
+        // x grid
+        $("#x_grid").on('change', function(){
+            $(this).is(":checked") ? option.x_grid = true : option.x_grid = false;
+        });
+
+        // y grid
+        $("#y_grid").on('change', function(){
+            $(this).is(":checked") ? option.y_grid = true : option.y_grid = false;
+        });
+
+        // pointer expand
+        $("#pointExpand").on('change', function(){
+            $(this).is(":checked") ? option.pointExpand = true : option.pointExpand = false;
+        });
+
+        // axis_x_tick_center
+        $("#axis_x_tick_center").on('change', function(){
+            $(this).is(":checked") ? option.axis_x_tick_center = true : option.axis_x_tick_center = false;
+        });
+
+        // data label sho hide
+        $("#label").on('change', function(){
+            $(this).is(":checked") ? option.label = true : option.label = false;
+        });
+
+        // axis_x_outer
+        $("#axis_x_outer").on('change', function(){
+            $(this).is(":checked") ? option.axis_x_outer = true : option.axis_x_outer = false;
+        });
+
+        // axis_y_outer
+        $("#axis_y_outer").on('change', function(){
+            $(this).is(":checked") ? option.axis_y_outer = true : option.axis_y_outer = false;
+        });
+
+        // legend
+        $("#legend").on('change', function(){
+            $(this).is(":checked") ? option.legend = true : option.legend = false;
+        });
+
+        // focusLine
+        $("#focusLine").on('change', function(){
+            $(this).is(":checked") ? option.focusLine = true : option.focusLine = false;
+        });
+
+        // tooltip
+        $("#tooltip").on('change', function(){
+            $(this).is(":checked") ? option.tooltip = true : option.tooltip = false;
+        });
+
+        // labelPosition
+        $("#labelPosition").on('change', function(){
+            $(this).is(":checked") ? option.labelPosition = true : option.labelPosition = false;
+        });
+
+        // zeroValue
+        $("#zeroValue").on('change', function(){
+            $(this).is(":checked") ? option.zeroValue = true : option.zeroValue = false;
+        });
+
+        // rectView
+        $("#rectView").on('change', function(){
+            $(this).is(":checked") ? option.rectView = true : option.rectView = false;
+        });
+
+        // default value
+        var df = option.data.shift();
+        // var lf = option.yAxis[0].shift();
+        $(".data").attr('value', option.data);
+        var i = 0;
+        for ( i; i < 5; i++ ){
+            if ( option.yAxis[i] != undefined ){
+                option.yAxis[i].shift();
+                $(".yAxis_"+i).attr('value', option.yAxis[i]);
+            }
+        }
+        $(".colorPattern").attr('value', option.colorPattern);
+        $(".svgWidth").attr('value', option.svgWidth);
+        $(".svgHeight").attr('value', option.svgHeight);
+        $(".svgBackgroundColor").attr('value', option.svgBackgroundColor);
+        $(".dataLabelDiv").attr('value', option.dataLabelDiv);
+        $(".dataLabel_up").attr('value', option.dataLabel_up);
+        $(".dataLabel_down").attr('value', option.dataLabel_down);
+        $(".pointFillColor").attr('value', option.pointFillColor);
+        // $(".pointStrokeColor").attr('value', option.pointStrokeColor);
+        for ( i; i < 5; i++ ){
+            if ( option.pointStrokeColor[i] != undefined ){
+                $(".pointStrokeColor_"+i).attr('value', option.pointStrokeColor[i]);
+            }
+        }
+        $(".pointRad").attr('value', option.pointRad);
+        $(".pointExpandRate").attr('value', option.pointExpandRate);
+        $(".regions_start").attr('value', option.regions_start);
+        $(".regions_end").attr('value', option.regions_end);
+        $(".regions_start_2").attr('value', option.regions_start_2);
+        $(".regions_end_2").attr('value', option.regions_end_2);
+        $(".axis_y_count").attr('value', option.axis_y_count);
+        $(".axis_y_max").attr('value', option.axis_y_max);
+        $(".axis_y_min").attr('value', option.axis_y_min);
+        $(".dataLabelColor").attr('value', option.dataLabelColor);
+        $(".dataLabelFontSize").attr('value', option.dataLabelFontSize);
+        $(".axis_x_color").attr('value', option.axis_x_color);
+        $(".axis_y_color").attr('value', option.axis_y_color);
+        $(".dasharrayX").attr('value', option.dasharrayX);
+        $(".dasharrayY").attr('value', option.dasharrayY);
+        $(".gridLineColor").attr('value', option.gridLineColor);
+        $(".axis_x_tick_line").attr('value', option.axis_x_tick_line);
+        $(".axis_y_tick_line").attr('value', option.axis_y_tick_line);
+        $(".axis_y_font_size").attr('value', option.axis_y_font_size);
+        $(".axis_y_font_color").attr('value', option.axis_y_font_color);
+        $(".axis_x_font_size").attr('value', option.axis_x_font_size);
+        $(".axis_x_font_color").attr('value', option.axis_x_font_color);
+        $(".axis_x_positionY").attr('value', option.axis_x_positionY);
+        $(".axis_y_positionY").attr('value', option.axis_y_positionY);
+        $(".format").attr('value', option.format);
+        $(".rectOddColor").attr('value', option.rectOddColor);
+        $(".rectEvenColor").attr('value', option.rectEvenColor);
+        $(".type").attr('value', option.type);
+
+        var myJSON = JSON.stringify(option);
+        $(".codeView").text(myJSON);
+
+        $target.css({'width': Number($(".svgWidth").val())+'px', 'margin':'0 auto'});
+
+        $(".update").on('click',function(){
+            option.svgWidth = Number($(".svgWidth").val());
+            option.svgHeight = Number($(".svgHeight").val());
+
+            var i = 0;
+            var xDataList = $('.data').val().split(',');
+            xDataList.unshift("data");
+            option.data = xDataList;
+
+            for ( i; i < 5; i++ ){
+                var yDataList = $('.yAxis_'+i).val().split(',');
+                yDataList.unshift("lineData-"+i);
+                option.yAxis[i] = yDataList;
+            }
+
+            var colorPattern = $('.colorPattern').val().split(',');
+            option.colorPattern = colorPattern;
+            console.log('colorPattern: ', colorPattern);
+
+            option.svgBackgroundColor = $(".svgBackgroundColor").val();
+            option.pointRad = Number($(".pointRad").val());
+            option.pointExpandRate = Number($(".pointExpandRate").val());
+            option.axis_y_count = Number($(".axis_y_count").val());
+            option.axis_y_max = Number($(".axis_y_max").val());
+            option.axis_y_min = Number($(".axis_y_min").val());
+            option.dataLabelColor = $(".dataLabelColor").val();
+            // option.colorPattern = [$('.colorPattern').val()]
+            option.dataLabelFontSize = Number($(".dataLabelFontSize").val());
+            option.dataLabelDiv = Number($(".dataLabelDiv").val());
+            option.dataLabel_up = Number($(".dataLabel_up").val());
+            option.dataLabel_down = Number($(".dataLabel_down").val());
+            option.pointFillColor = $(".pointFillColor").val();
+            option.axis_x_color = $(".axis_x_color").val();
+            option.axis_y_color = $(".axis_y_color").val();
+            option.dasharrayX = $(".dasharrayX").val();
+            option.dasharrayY = $(".dasharrayY").val();
+            option.gridLineColor = $(".gridLineColor").val();
+            option.axis_x_tick_line = $(".axis_x_tick_line").val();
+            option.axis_y_tick_line = $(".axis_y_tick_line").val();
+            option.axis_y_font_size = $(".axis_y_font_size").val();
+            option.axis_y_font_color = $(".axis_y_font_color").val();
+            option.axis_x_font_size = $(".axis_x_font_size").val();
+            option.axis_x_font_color = $(".axis_x_font_color").val();
+            option.axis_x_positionY = Number($(".axis_x_positionY").val());
+            option.axis_y_positionY = Number($(".axis_y_positionY").val());
+            option.regions_start = Number($(".regions_start").val());
+            option.regions_end = Number($(".regions_end").val());
+            option.regions_start_2 = Number($(".regions_start_2").val());
+            option.regions_end_2 = Number($(".regions_end_2").val());
+            option.tooltip_custom = $(".tooltip_custom").val();
+            option.format = $(".format").val();
+            option.rectOddColor = $(".rectOddColor").val();
+            option.rectEvenColor = $(".rectEvenColor").val();
+            option.type = $(".type").val();
+
+            var chart = c3.generate({
+                bindto: $thisTarget,
+                size: {
+                    width: option.svgWidth,
+                    height: option.svgHeight
+                },
+                onrendered: function() {
+                    var i = 0;
+                    $target.find('svg').css('background-color', option.svgBackgroundColor);
+                    if ( option.labelPosition ){
+                        for ( i; i < $yAxisLabel.length; i++ ){
+                            d3.selectAll('.c3-texts-' + $yAxisLabel[i] + ' .c3-text').each(function(d) {
+                                if ( d === undefined ) return;
+                                d.value > option.dataLabelDiv ? getDataLabelDiv( d, option.dataLabel_up, i ) : getDataLabelDiv( d, option.dataLabel_down, i );
+                            });
+                        }
+                    }
+
+                    if ( option.zeroValue ){
+                        for ( i; i < $yAxisLabel.length; i++ ){
+                            d3.selectAll($thisTarget + ' .c3-texts-' + $yAxisLabel[i] + ' .c3-text').each(function(d) {
+                                getDataLabelVal(d, i);
+                            });
+                        }
+                    }
+
+                    var rectLength = $($thisTarget).find('.c3-event-rects-single rect').css('fill-opacity', 0.4);
+
+                    if ( option.rectView ){
+                        $($thisTarget).find('.c3-event-rects-single rect').each(function(i){
+                            var cls = $(this).attr('class').split(' ');
+                            var clsNum = cls[cls.length-1];
+                            $($thisTarget).find('.c3-event-rects-single rect:odd').attr('fill',option.rectOddColor);
+                            $($thisTarget).find('.c3-event-rects-single rect:even').attr('fill',option.rectEvenColor);
+                        });
+                    }else{
+                        $($thisTarget).find('.c3-event-rects-single rect:odd').attr('fill', 'transparent');
+                        $($thisTarget).find('.c3-event-rects-single rect:even').attr('fill', 'transparent');
+                    }
+
+                    function getDataLabelDiv( d, val, i ){
+                        $('.c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).css('transform','translate(0, '+ val +'px)');
+                    }
+
+                    function getDataLabelVal( d, i ){
+                        if ( d.value === 0 ) {
+                            $($thisTarget + ' .c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text('');
+                        }else{
+                            var t =$($thisTarget + ' .c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text();
+                            $($thisTarget + ' .c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text(t + option.format);
+                        }
+                    }
+
+                    for ( i = 0; i < option.pointStrokeColor.length; i++ ){
+                        d3.selectAll( $($thisTarget + ' .c3-target-' + $yAxisLabel[i] + ' circle')).each(function(d){
+                            $($thisTarget + ' .c3-target-' + $yAxisLabel[i] + ' circle.c3-circle-'+d.index).css('stroke', option.pointStrokeColor[i]);
+                            console.log(option.pointStrokeColor[i]);
+                        });
+                    }
+
+                    this.getCircles().style({'fill': option.pointFillColor});
+
+                    // console.log($thisTarget, $dataLabel);
+                    $($thisTarget + ' .c3-texts .c3-text').css({'fill': option.dataLabelColor, 'font-size': option.dataLabelFontSize });
+                    $($thisTarget + ' .c3-axis-x path').css('stroke', option.axis_x_color);
+                    $($thisTarget + ' .c3-axis-x line').css('stroke', option.axis_x_color);
+                    $($thisTarget + ' .c3-axis-y path').css('stroke', option.axis_y_color);
+                    $($thisTarget + ' .c3-axis-y line').css('stroke', option.axis_y_color);
+                    $($thisTarget + ' .c3-axis-x .tick text').attr('y', option.axis_x_positionY);
+                    $($thisTarget + ' .c3-axis-y .tick text').attr('y', option.axis_y_positionY);
+                    $($thisTarget + ' .c3-axis-y .tick line').css('stroke', option.axis_y_tick_line);
+                    $($thisTarget + ' .c3-axis-x .tick line').css('stroke', option.axis_x_tick_line);
+                    $($thisTarget + ' .c3-line').css('stroke-dasharray', '0');
+                    $($thisTarget + ' .c3-ygrid').css('stroke-dasharray', option.dasharrayY);
+                    $($thisTarget + ' .c3-xgrid').css('stroke-dasharray', option.dasharrayX);
+                    $($thisTarget + ' .c3-grid line').css('stroke', option.gridLineColor);
+                    $($thisTarget + ' .c3-axis-y text').css({'font-size': option.axis_y_font_size, 'fill': option.axis_y_font_color});
+                    $($thisTarget + ' .c3-axis-x text').css({'font-size': option.axis_x_font_size, 'fill': option.axis_x_font_color});
+                },
+                data: {
+                    x : $dataLabel,
+                    columns: [option.data, option.yAxis[0]],
+                    type: option.type,
+                    regions: {
+                        [$yAxisLabel]: [{
+                            'start' : option.regions_start,
+                            'end': option.regions_end,
+                            'style': option.regions_style
+                        }, {
+                            'start': option.regions_start_2,
+                            'end': option.regions_end_2
+                        }]
+                    },
+                    labels: option.label
+                },
+                axis: {
+                    x: {
+                        type: 'category',
+                        tick: {
+                          centered: option.axis_x_tick_center,
+                          outer: option.axis_x_outer
+                        }
+                    },
+                    y: {
+                        max: option.axis_y_max,
+                        min: option.axis_y_min,
+                        tick: {
+                            count: option.axis_y_count,
+                            outer: option.axis_y_outer,
+                            format: function (d) { return Math.round(d); }
+                        },
+                        padding: {top:0, bottom:0}
+                    }
+                },
+                tooltip: {
+                    contents: function (d, defaultTitleFormat, defaultValueFormat, color) {
+                        return option.tooltip_custom;
+                    },
+                    show: option.tooltip
+                },
+                grid: {
+                    y: {
+                        show: option.y_grid
+                    },
+                    x: {
+                        show: option.x_grid
+                    },
+                    focus: {
+                        show: option.focusLine
+                    }
+                },
+                point: {
+                    r: option.pointRad,
+                    focus: {
+                        expand: {
+                            enabled: option.pointExpand,
+                            r: option.pointRad * option.pointExpandRate
+                        }
+                    }
+                },
+                color: {
+                    pattern: option.colorPattern
+                },
+                legend: {
+                  show: option.legend
+                }
+            });
+
+            var yDataFormatList = [];
+            for (var k = 0; k < option.yAxis.length; k++){
+                yDataFormatList[k] = $yAxisLabel[k];
+            }
+
+            var yDataArr=[];
+            yDataArr[0]=option.data;
+            for (var j = 0; j < option.yAxis.length; j++){
+                yDataArr[j+1] =option.yAxis[j];
+            }
+
+            chart.load({
+                columns: yDataArr
+            });
+
+            var myJSON = JSON.stringify(option);
+            $(".codeView").text(myJSON);
+        });
+    </script>
+</body>
+</html>

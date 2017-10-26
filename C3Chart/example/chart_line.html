@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>graph</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism-coy.min.css" type="text/css" />
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+    <script type="text/javascript" src="https://www.jobkorea.co.kr/Include/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js"></script>
+    <style type="text/css">
+        * { box-sizing: border-box; }
+        html, body { padding: 0; margin: 0; background: #1F2530; }
+        body { width: 900px; margin: 0 auto; }
+        section { border-radius: 5px; background: #fff; padding: 50px 20px 20px; margin-bottom: 20px; }
+        h1 { padding: 20px 0px 0; color: #fff; }
+        h2 { color: #fff; font-size: 16px; }
+        .chart { margin: 0 auto; }
+        .custom { background: #3A475B; }
+
+        /* line css */
+        .c3-tooltip-container { background-color: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 4px 16px 4px; }
+        .tooltip-custom { font-size: 12px; }
+        .tooltip-custom span { color: red; }
+
+        .line .c3-grid .c3-xgrid-focus { visibility : hidden !important; }
+        .line .c3-line { stroke-dasharray: 0; }
+        .line .c3-ygrid { stroke-dasharray: 2 0; }
+        .line .c3-grid line { stroke: #dedede; }
+        .line .c3-texts .c3-text { fill: dodgerblue !important; font-size: 14px; }
+        .line .c3-axis-x path, .line .c3-axis-x line { stroke: #666; }
+        .line .c3-axis-y line, .line .c3-axis-y path { stroke: #fff; }
+        .c3-axis-y text { font-size:12px; fill: black; }
+        .c3-axis-x text { font-size:12px; fill: black; }
+
+        .line2 .c3-texts .c3-text {/* fill: #FFF !important; */font-size: 12px; }
+        .line2 .c3-grid line { stroke: #1F2530; opacity: .5; }
+        .line2 .c3-axis-x path, .line2 .c3-axis-x line { stroke: #1F2530; }
+        .line2 .c3-axis-y line, .line2 .c3-axis-y path { stroke: #3A475B; }
+
+        .js { padding: 0; border-radius: 0; }
+        .fullcode { font-size: 12px; }
+        .option { font-size: 14px; }
+    </style>
+</head>
+<body>
+    <h1>Line Chart</h1>
+    <section>
+        <div class="chart line"></div>
+    </section>
+
+    <section class="custom">
+        <div class="chart line2"></div>
+    </section>
+
+    <h2>Default</h2>
+    <section class="js option">
+        <pre class="language-js"><code class="language-js">var chart = c3.generate({ ... });</code></pre>
+    </section>
+
+    <h2>Option - bindto</h2>
+    <section class="js option">
+        <pre class="language-js"><code class="language-js">bindto: '#myContainer' /* id or class name */
+// or element
+bindto: document.getElementById('myContainer') /* javascript id select */
+// or D3 selection object
+bindto: d3.select('#myContainer') /* D3 select */</code></pre>
+    </section>
+
+    <h2>Option - data</h2>
+    <section class="js option">
+        <pre class="language-js"><code class="language-js">1. "data.x"
+data: { x: 'x' }  API에는 data: { x: 'date' }로 되어 있음.
+
+2. "data.columns"
+columns: [
+  ['data1', 30, 20, 50, 40, 60, 50],
+  ['data2', 200, 130, 90, 240, 130, 220],
+  ['data3', 300, 200, 160, 400, 250, 250]
+]
+
+data: { x: 'x' }
+columns: [
+    ['x', '사원', '주임', '대리', '과장', '차장', '부장', '임원'],
+    ['lineData', 2800, 3400, 4000, 4800, 5600, 6400, 7600]
+],
+data 의 x 값과  columns의 'x' 값이 일치하지 않으면 다음과 같은 에러 발생.
+Error: x is not defined for id = "x". 발생
+
+3. "data.type"
+line, spline, step, area, area-spline, area-step, bar, scatter, pie, donut, gauge
+
+4. "data.labels"
+labels : { show : true } // or false
+// 2개 이상의 차트일 경우 하나의 데이터 라벨만 표시
+labels: {
+    format: {
+        'data1': d3.format('')
+    }
+}
+
+5. "data.format"
+data1: d3.format('%H:%M:%S'), // %Y-%m-%d, %H:%M:%S, %, $
+data1: function (v, id, i, j) { return "Format for data1"; }
+
+6. "axis.x.type"
+'timeseries', 'category', 'indexed'
+'timeseries' : http://c3js.org/samples/timeseries.html
+tick: {
+    format: '%Y-%m-%d'
+}
+
+7. "axis.tick"
+tick: {
+  centered: true, // x axis label 중앙정렬 y축은 center: Number
+  outer: false,   // 좌우 끝의 세로선 삭제
+  count: 4        // 축의 개수
+}
+
+8. "tooltip"
+// tooltip customize
+contents: function (d) { //d == data
+    return "&lt;div class='tooltip-custom'&gt;최소 3,000 ~ 최대 8,000이상&lt;br&gt;전년비 &lt;span&gt;6%&lt;/span&gt;&lt;/div&gt;"
+}
+// 'tooltip-custom' Class 생성 후 style 지정
+
+9. "grid"
+grid: {
+    y: {
+        show: true or false
+    },
+    x: {
+        show: true or false
+    }
+}
+
+10. "point"
+point: {
+    r: 4, // 반지름
+    focus: {
+        expand: {
+            enabled: false // 마우스 오버: 포인트 확장 유무
+        }
+    }
+},
+point.focus.expand.r
+expand: {
+    r: 1 // default point.r * 1.75
+}
+point.select.r
+select: {
+    r: 3 // default point.r * 4
+}
+
+11. "legend"
+legend: {
+  hide: true
+}
+position : top-left, top-right, bottom-left, bottom-right</code></pre>
+    </section>
+
+    <h2>Code review</h2>
+    <section class="js fullcode">
+        <pre class="language-js">
+            <code class="language-js">var chart = c3.generate({
+    bindto: '.line',
+    size: {
+        height: 360,
+        width: 800
+    },
+    onrendered: function() {
+        d3.selectAll('.c3-texts-lineData .c3-text').each(function(d) {
+            if ( d == undefined ){
+                return;
+            }else{
+                if ( d.value &gt; 4700 ){
+                    $('.c3-texts-lineData.c3-texts .c3-text-' + d.index).css('transform','translate(0, 25px)');
+                }else{
+                    $('.c3-texts-lineData.c3-texts .c3-text-' + d.index).css('transform','translate(0, -5px)');
+                }
+            }
+        });
+
+        this.getCircles().style({'fill':'#fff', 'stroke':'dodgerblue'});
+    },
+    data: {
+        x : 'x',
+        columns: [
+            ['x', '사원', '주임', '대리', '과장', '차장', '부장', '임원'],
+            ['lineData', 2800, 3400, 4000, 4800, 5600, 6400, 7600]
+        ],
+        type: 'line',
+        regions: {
+          'lineData': [{
+            'start': 1,
+            'end': 2,
+            'style': 'stroke'
+          }, {
+            'start': 4
+          }]
+        },
+        labels: {
+            show: true
+        }
+        /* point color array
+        color: function(color, d){
+             return arr[d.index];
+         }*/
+    },
+    axis: {
+        x: {
+            type: 'category',
+            tick: {
+              centered: true,
+              outer: false
+            }
+        },
+        y: {
+            max: 8000,
+            min: 0,
+            tick: {count:5},
+            padding: {top:0, bottom:0}
+        }
+    },
+    tooltip: {
+        contents: function (d, defaultTitleFormat, defaultValueFormat, color) {
+            return "&lt;div class='tooltip-custom'&gt;최소 3,000 ~ 최대 8,000이상&lt;br&gt;전년비 &lt;span&gt;6%&lt;/span&gt;&lt;/div&gt;"
+        }
+    },
+    grid: {
+        y: {
+            show:true
+        },
+        x: {
+            show: false
+        }
+    },
+    point: {
+        r: 4,
+        focus: {
+            expand: {
+                enabled: false
+            }
+        }
+    },
+    color: {
+        pattern: ['dodgerblue']
+    },
+    legend: {
+      hide: true
+    }
+});</code>
+        </pre>
+    </section>
+    <script type="text/javascript" src="./line.js"></script>
+    <script type="text/javascript" src="./line2.js"></script>
+</body>
+</html>

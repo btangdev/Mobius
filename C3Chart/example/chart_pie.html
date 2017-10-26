@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>graph</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism-coy.min.css" type="text/css" />
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+    <script type="text/javascript" src="https://www.jobkorea.co.kr/Include/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js"></script>
+    <style type="text/css">
+        * { box-sizing: border-box; }
+        html, body { padding: 0; margin: 0; background: #1F2530; }
+        body { width: 900px; margin: 0 auto; }
+        section { border-radius: 5px; background: #fff; padding: 50px 20px 20px; margin-bottom: 20px; }
+        h1 { padding: 20px 0px 0; color: #fff; }
+        h2 { color: #fff; font-size: 16px; }
+        .chart { width: 800px; margin: 0 auto; }
+        .custom { background: #3A475B; padding-top: 0px; }
+        
+        /* css */
+        svg { width: 800px; height: 350px; }
+        .c3-tooltip-container { background-color: #fff; border: 1px solid #ddd; border-radius: 0px; padding: 4px 16px 2px; }
+        .c3-grid .c3-xgrid-focus { visibility : hidden !important; }
+        .c3-line { stroke-dasharray: 0; }
+        .tooltip-custom { font-size: 12px; }
+        .tooltip-custom span { color: red; }
+        .c3-ygrid { stroke-dasharray: 2 0; }
+        .c3-grid line { stroke: #dedede; }
+        .c3-texts .c3-text { fill: dodgerblue !important; font-size: 12px; }
+        /*#chart .c3-circle { stroke: skyblue; stroke-width: 2; fill: white!important; }*/
+        .c3 .c3-axis-x path, .c3 .c3-axis-x line { stroke: #ddd; } 
+        .c3 .c3-axis-y path, .c3 .c3-axis-y line { stroke: #fff; } 
+        .c3-axis-y text { font-size:11px; fill: gray; }
+        .c3-axis-x text { font-size:11px; fill: darkgray; }
+        .legendLabel { fill: #000 !important; }
+        .c3-chart-arcs-title { transform: translate(0, 10px); }
+        
+        .js { padding: 0; border-radius: 0; }
+        .fullcode { font-size: 12px; }
+        .option { font-size: 14px; }
+    </style>
+</head>
+<body>
+    <h1>Donut Chart</h1>
+    <section>
+        <div class="chart donut"></div>
+    </section>
+
+    <h1>Pie Chart</h1>
+    <section class="custom">
+        <div class="chart pie"></div>
+    </section>
+    
+    <h2>Default</h2>
+    <section class="js option">
+        <pre class="language-js"><code class="language-js">var chart = c3.generate({ ... });</code></pre>
+    </section>
+    
+     <h2>Option - onrendered</h2>
+    <section class="js option">
+        <pre class="language-js"><code class="language-js">onrendered: function(d, i) {
+    d3.selectAll('.pie .c3-shapes').attr('transform','translate(0,0)');
+    d3.selectAll('.pie .c3-chart-arc text').attr("dy", "0em")
+    
+    d3.selectAll('.pie .c3-chart-arc')
+        .append('text')
+        .attr({'class':'legendLabel2'})
+        .attr("transform", function(d) {
+            var c = arc.centroid(d); // d3의 부채꼴 중심각 구하기
+            var x = c[0]; 
+            var y = c[1];
+            var h = Math.sqrt( x * x + y * y );
+            return "translate(" + ( x / h * labelr ) +  ',' + ( y / h * labelr ) +  ")"; 
+        })
+        .attr("dy", "0.35em")
+        .attr("text-anchor", function(d) {
+            return (d.endAngle + d.startAngle)/2 > Math.PI ? "end" : "start";
+        })
+        .text(function(d){ return d.data.id; })
+}</code></pre>
+    </section>
+    
+     <h2>Code review</h2>
+    <section class="js fullcode">
+        <pre class="language-javascript">
+            <code class="language-javascript">var w = 300;
+var h = 200;
+var r = Math.min(w, h) / 2;
+var labelr = r * 1.2;
+var arc = d3.svg.arc().innerRadius(r * .6).outerRadius(r);
+
+var chart = c3.generate({
+    bindto: '.donut',
+    size: {
+        height: h+50,
+        width: 800
+    },
+    onrendered: function(d, i) {
+        d3.selectAll('.c3-shapes').attr('transform','translate(0,10)');
+        d3.selectAll('.c3-chart-arc text').attr("dy", "1em")
+        
+        d3.selectAll('.c3-chart-arc')
+            .append('text')
+            .attr({'class':'legendLabel'})
+            .attr("transform", function(d) {
+                var c = arc.centroid(d);
+                var x = c[0];
+                var y = c[1];
+                var h = Math.sqrt( x * x + y * y );
+                return "translate(" + ( x / h * labelr ) +  ',' + ( y / h * labelr ) +  ")"; 
+            })
+            .attr("dy", "1em")
+            .attr("text-anchor", function(d) {
+                return (d.endAngle + d.startAngle)/2 > Math.PI ? "end" : "start";
+            })
+            .text(function(d){ return d.data.id; })
+    },
+    data: {
+        columns: [
+            ['3,000미만', 345], 
+            ['3,000~4,000', 240],
+            ['4,000~5,000', 120],
+            ['5,000이상', 89]
+        ],
+        type: 'donut'
+    },
+    donut:{
+        title: '34 ~ 39세',
+        label: {
+            show: true
+        },
+        expand: false
+    },
+    tooltip: {
+        contents: function (d, defaultTitleFormat, defaultValueFormat, color) {
+            return "&lt;div class='tooltip-custom'&gt;" + d[0].value + "명&lt;/div&gt;"
+        }
+    },
+    legend: {
+      hide: true,
+      position: 'inset'
+    },
+    color: {
+        pattern: ['dodgerblue','indianred','yellowgreen','teal']
+    }
+});
+            </code>
+        </pre>
+    </section>
+    <script type="text/javascript" src="./donut.js"></script>
+    <script type="text/javascript" src="./pie.js"></script>
+</body>
+</html>

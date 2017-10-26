@@ -1,0 +1,81 @@
+body { background: #2A363B; }
+#guide > .pusher > .full.height { display: flex; }
+#guide > .pusher > .full .toc { width: 210px; position: relative; z-index: 1; background-color: #1b1c1d; -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; }
+#guide > .pusher > .full.height .article { width: 100%; padding: 0 20px; background: #2A363B; }
+h2.section { color: #fff; }
+.ui.header { border: none; margin: 0; padding: 0 0; font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif; font-weight: 700; line-height: 1.2em; padding: 30px 0 6px; }
+h1.ui.header { color: #fff; }
+/*.ui.grid .row p { font-weight: bold; font-size: 16px; padding: 10px 0 0 10px; }*/
+input[type='text'] { width: 80px; color: #4ECDC4; }
+input.data, input.yAxis_0, input.yAxis_1, input.yAxis_2, input.yAxis_3, input.yAxis_4, input.tooltip_custom { width: 250px; }
+.sub.header { display: block; font-weight: 400; padding: 0; margin: 0; font-size: 1rem; line-height: 1.2em; color: #99B898; padding-bottom: 40px; }
+.viewGraph { background: #fff; }
+.inputForm { /*height: 470px; overflow-y: auto;*/ background: #343838; color: #fff; position: relative; }
+.inputForm .ui { color: #fff; }
+.inputForm > .row { margin-bottom: 5px; }
+.buttonBox {text-align: center;}
+.update { position: relative; z-index: 100000; width: 200px; margin: 0 auto; display: inline-block; }
+.codeView { background: #f1f1f1; word-break: break-all; padding: 20px; }
+.ui.checkbox label, .ui.checkbox + label { color: #fff; }
+.ui.checkbox .box, .ui.checkbox label { cursor: pointer; }
+.ui.checkbox { margin-right: 10px; }
+.usage { background: #fff; padding: 0 30px 30px; width: 100%; }
+.usage p { color: #000 !important; }
+/*.options { background: #fff; }*/
+b { background-color: rgba(0, 0, 0, 0.06); color: #276f86; padding: 1px 4px 3px; }
+b.returnValue { position: absolute; top: 11px; right: 30px; padding: 1px 10px 3px; }
+.ui.message p { margin: 0; }
+
+#example .example { margin: 2em 0em; padding: 2em 0em; position: relative; -webkit-tap-highlight-color: transparent; }
+#example .intro .example .anchor + p { margin-top: 0.5em; font-weight: normal; }
+#example .no.example .anchor + p { margin: 0em 0px 1em; padding-bottom: 0em; }
+#example .main.container .introduction p, #example .main.container .tab > p, #example .main.container .example > p, #example .main.container > p { font-size: 16px; line-height: 1.5; color: rgba(0, 0, 0, 0.8); font-weight: normal; }
+
+.thumbnail {  }
+.empty {}
+.thumb { background: #2A363B; text-align: center; color: #fff; }
+.thumb img { width: 100%; border: 2px solid #000; -webkit-box-shadow: 0px 0px 60px 5px rgba(0,0,0,0.75); -moz-box-shadow: 0px 0px 60px 5px rgba(0,0,0,0.75); box-shadow: 0px 0px 60px 5px rgba(0,0,0,0.75);}
+
+/* chart style */
+.lineChart .c3-tooltip-container { background-color: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 4px 16px 6px; }
+.lineChart .tooltip-custom { font-size: 12px; }
+.lineChart .tooltip-custom span { color: red; }
+.chartBox { padding: 60px 20px; box-sizing: border-box; }
+
+input.svgWidth { width: 114px; }
+input.svgHeight { width: 115px; }
+input.svgBackgroundColor { width: 249px;  }
+input.data { width: 258px; }
+input.dataLabel_up { width: 68px; }
+input.dataLabel_down { width: 68px; }
+input.axis_y_count { width: 50px; }
+input.dataLabelDiv { width: 70px; }
+input.axis_y_max { width: 99px; }
+input.axis_y_min { width: 99px; }
+input.axis_x_color { width: 112px; }
+input.axis_y_color { width: 112px; }
+input.axis_x_tick_line { width: 88px; }
+input.axis_y_tick_line { width: 88px; }
+input.axis_x_font_size { width: 78px; }
+input.axis_x_font_color { width: 95px; }
+input.axis_y_font_size { width: 78px; }
+input.axis_y_font_color { width: 95px; }
+input.axis_x_positionY { width: 69px; }
+input.axis_y_positionY { width: 69px; }
+input.axis_x_tick_line { width: 88px; }
+input.axis_y_tick_line { width: 88px; }
+input.axis_x_tick_line { width: 88px; }
+input.axis_y_tick_line { width: 88px; }
+input.dataLabelFontSize { width: 79px; }
+input.pointFillColor { width: 92px; }
+input.regions_start { width: 68px; }
+input.regions_end { width: 68px; }
+input.colorPattern { width: 219px; }
+input.pointRad { width: 52px; }
+input.pointExpandRate { width: 58px; }
+input.gridLineColor { width: 184px; }
+input.format { width: 218px; }
+input.rectOddColor { width: 183px; }
+input.rectEvenColor { width: 180px; }
+input.dasharrayX { width: 58px; }
+input.dasharrayY { width: 58px; }

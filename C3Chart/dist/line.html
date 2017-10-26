@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LineChart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" type="text/css" />
+    <script src="../libs/jquery.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+    <script type="text/javascript" src="./js/line.js"></script>
+    <style media="screen">
+    body { background: #006E9A; }
+    h1 { text-align: center; color: #fff; padding-top: 40px; }
+    /* chart style */
+    .lineChart .c3-tooltip-container { background-color: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 4px 16px 6px; }
+    .lineChart .tooltip-custom { font-size: 12px; }
+    .lineChart .tooltip-custom span { color: red; }
+    .chartBox { padding: 60px 20px; box-sizing: border-box; }
+    .c3-line {stroke-width: 2;}
+    </style>
+</head>
+<body>
+    <h1>SVG LINE CHART SAMPLE</h1>
+    <div class="chartBox">
+        <div class="lineChart"></div>
+    </div>
+
+    <div class="chartBox">
+        <div class="lineChart2"></div>
+    </div>
+
+    <div class="chartBox">
+        <div class="lineChart3"></div>
+    </div>
+
+    <div class="chartBox">
+        <div class="lineChart4"></div>
+    </div>
+
+    <script>
+        var option = {
+            data: ['data1', '20세이하', '21~25세', '26~30세', '31~35세', '36~40세', '41~45세', '46~50세', '51세이상'],
+            yAxis: [['A-1', 0, 50, 0, 50, 0, 0, 0], ['A-2', 60, 70, 85, 60, 55, 30, 60]],
+            svgWidth: 800,
+            svgHeight: 320,
+            svgBackgroundColor: '#FFF',
+            dataLabelDiv: 6000,
+            dataLabel_up: 35,
+            dataLabel_down: -10,
+            label: true,
+            pointFillColor: '#fff',
+            pointStrokeColor: ['#ff8759','#61c3af'],
+            pointRad: 4,
+            pointExpand: false,
+            pointExpandRate: 1.75,
+            colorPattern: ['#ff8759','#61c3af'],
+            x_grid: false,
+            y_grid: true,
+            legend: false,
+            regions_start: 0,
+            regions_end: 0,
+            regions_start_2: 0,
+            regions_end_2: 0,
+            regions_style: 'dashed',
+            focusLine: false,
+            axis_x_tick_center: true,
+            axis_x_outer: false,
+            axis_y_outer: false,
+            axis_y_count: 5,
+            axis_y_max: 100,
+            axis_y_min: 0,
+            tooltip_custom: "<div class='tooltip-custom'>최소 5,000 ~ 최대 10,000이상<br>전년비 <span>6%</span></div>",
+            tooltip: false,
+            dataLabelColor: "#000",
+            dataLabelFontSize: '14',
+            axis_y_color: '#fff',
+            axis_x_color: '#cccccc',
+            dasharrayX: '2 2',
+            dasharrayY: '0 0',
+            gridLineColor: '#e9e9e9',
+            axis_y_font_size: '12',
+            axis_y_font_color: '#bbbbbb',
+            axis_x_font_size: '12',
+            axis_x_font_color: '#666666',
+            axis_x_positionY: 56,
+            axis_y_positionY: 10,
+            axis_x_tick_line: '#fff',
+            axis_y_tick_line: '#fff',
+            labelPosition: false,
+            format: '%',
+            zeroValue: true,
+            rectView: true,
+            rectOddColor:'#ddd',
+            rectEvenColor:'transparent'
+        };
+
+        var option2 = {
+            data: ['data1', '고졸미만', '고졸(예정)', '초대졸(예정)', '대졸(예정)', '석박사(예정)'],
+            yAxis: [['B-1', 0, 0, 50, 50, 0]],
+            svgWidth: 800,
+            svgHeight: 320,
+            svgBackgroundColor: '#FFF',
+            dataLabelDiv: 6000,
+            dataLabel_up: 35,
+            dataLabel_down: -10,
+            label: true,
+            pointFillColor: '#ff8759',
+            pointStrokeColor: ['#ff8759'],
+            pointRad: 4,
+            pointExpand: false,
+            pointExpandRate: 1.75,
+            colorPattern: ['#ff8759'],
+            x_grid: false,
+            y_grid: true,
+            legend: false,
+            regions_start: 1,
+            regions_end: 0,
+            regions_start_2: 0,
+            regions_end_2: 0,
+            regions_style: 'dashed',
+            focusLine: false,
+            axis_x_tick_center: true,
+            axis_x_outer: false,
+            axis_y_outer: false,
+            axis_y_count: 5,
+            axis_y_max: 100,
+            axis_y_min: 0,
+            tooltip_custom: "<div class='tooltip-custom'>최소 5,000 ~ 최대 10,000이상<br>전년비 <span>6%</span></div>",
+            tooltip: false,
+            dataLabelColor: "#000",
+            dataLabelFontSize: '14',
+            axis_y_color: '#fff',
+            axis_x_color: '#cccccc',
+            dasharrayX: '2 2',
+            dasharrayY: '0 0',
+            gridLineColor: '#e9e9e9',
+            axis_y_font_size: '12',
+            axis_y_font_color: '#bbbbbb',
+            axis_x_font_size: '12',
+            axis_x_font_color: '#666666',
+            axis_x_positionY: 6,
+            axis_y_positionY: 10,
+            axis_x_tick_line: '#fff',
+            axis_y_tick_line: '#fff',
+            labelPosition: false,
+            format: '%',
+            zeroValue: true,
+            rectView: true,
+            rectOddColor:'#ddd',
+            rectEvenColor:'transparent'
+        };
+
+        var option3 = {
+            data: ['data1', '신입', '최소', '평균', '최대'],
+            yAxis: [['C-1', 0, 2600, 2800, 3800, 6300], ['C-2', 2500, 4000, 3500, 4800, 5480], ['C-3', 2800, 3600, 4000, 5800, 6000], ['C-4', 2800, 3400, 5000, 6800, 6120], ['C-5', 4800, 4400, 4650, 6460, 5220]],
+            svgWidth: 800,
+            svgHeight: 320,
+            svgBackgroundColor: '#FFF',
+            dataLabelDiv: 6000,
+            dataLabel_up: 35,
+            dataLabel_down: -10,
+            label: false,
+            pointFillColor: '#fff',
+            pointStrokeColor: ['#8971bf','#61c3af','#359aff','#f3bb34', '#fa6048'],
+            pointRad: 4,
+            pointExpand: false,
+            pointExpandRate: 1.75,
+            colorPattern: ['#8971bf','#61c3af','#359aff','#f3bb34', '#fa6048'],
+            x_grid: true,
+            y_grid: true,
+            legend: false,
+            regions_start: 1,
+            regions_end: 0,
+            regions_start_2: 0,
+            regions_end_2: 0,
+            regions_style: 'dashed',
+            focusLine: false,
+            axis_x_tick_center: true,
+            axis_x_outer: false,
+            axis_y_outer: false,
+            axis_y_count: 9,
+            axis_y_max: 7000,
+            axis_y_min: 0,
+            tooltip_custom: "<div class='tooltip-custom'>최소 5,000 ~ 최대 10,000이상<br>전년비 <span>6%</span></div>",
+            tooltip: false,
+            dataLabelColor: "#000",
+            dataLabelFontSize: '14',
+            axis_y_color: '#fff',
+            axis_x_color: '#cccccc',
+            dasharrayX: '2 2',
+            dasharrayY: '0 0',
+            gridLineColor: '#e9e9e9',
+            axis_y_font_size: '12',
+            axis_y_font_color: '#bbbbbb',
+            axis_x_font_size: '12',
+            axis_x_font_color: '#666666',
+            axis_x_positionY: 16,
+            axis_y_positionY: 10,
+            axis_x_tick_line: '#fff',
+            axis_y_tick_line: '#fff',
+            labelPosition: false,
+            format: '%',
+            zeroValue: true,
+            rectView: false,
+            rectOddColor:'',
+            rectEvenColor:''
+        };
+
+        var option4 = {
+            data: ['data1', '사원', '주임', '대리', '과장', '차장'],
+            yAxis: [['D-1', 2800, 2600, 2800, 3800, 6300], ['D-2', 3200, 4000, 3500, 4800, 5480], ['D-3', 3600, 3600, 4000, 5800, 6000], ['D-4', 2400, 3400, 5000, 6800, 6120], ['D-5', 4800, 4400, 4650, 6460, 5220]],
+            svgWidth: 800,
+            svgHeight: 320,
+            svgBackgroundColor: '#FFF',
+            dataLabelDiv: 6000,
+            dataLabel_up: 35,
+            dataLabel_down: -10,
+            label: false,
+            pointFillColor: '#fff',
+            pointStrokeColor: ['#359aff','#fa6048','#8971bf','#f3bb34', '#61c3af'],
+            pointRad: 4,
+            pointExpand: false,
+            pointExpandRate: 1.75,
+            colorPattern: ['#359aff','#fa6048','#8971bf','#f3bb34', '#61c3af'],
+            x_grid: true,
+            y_grid: true,
+            legend: false,
+            regions_start: 1,
+            regions_end: 0,
+            regions_start_2: 0,
+            regions_end_2: 0,
+            regions_style: 'dashed',
+            focusLine: false,
+            axis_x_tick_center: true,
+            axis_x_outer: false,
+            axis_y_outer: false,
+            axis_y_count: 5,
+            axis_y_max: 8000,
+            axis_y_min: 0,
+            tooltip_custom: "<div class='tooltip-custom'>최소 5,000 ~ 최대 10,000이상<br>전년비 <span>6%</span></div>",
+            tooltip: false,
+            dataLabelColor: "#000",
+            dataLabelFontSize: '14',
+            axis_y_color: '#fff',
+            axis_x_color: '#cccccc',
+            dasharrayX: '2 2',
+            dasharrayY: '0 0',
+            gridLineColor: '#e9e9e9',
+            axis_y_font_size: '12',
+            axis_y_font_color: '#bbbbbb',
+            axis_x_font_size: '12',
+            axis_x_font_color: '#666666',
+            axis_x_positionY: 16,
+            axis_y_positionY: 10,
+            axis_x_tick_line: '#fff',
+            axis_y_tick_line: '#fff',
+            labelPosition: false,
+            format: '%',
+            zeroValue: true,
+            rectView: false,
+            rectOddColor:'',
+            rectEvenColor:'',
+            type: 'spline'
+        };
+
+        $('.lineChart').line(option);
+        $('.lineChart2').line(option2);
+        $('.lineChart3').line(option3);
+        $('.lineChart4').line(option4);
+    </script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>graph</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism-coy.min.css" type="text/css" />
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+    <script type="text/javascript" src="https://www.jobkorea.co.kr/Include/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js"></script>
+    <style type="text/css">
+        * { box-sizing: border-box; }
+        html, body { padding: 0; margin: 0; background: #1F2530; }
+        body { width: 900px; margin: 0 auto; }
+        section { border-radius: 5px; background: #fff; padding: 50px 20px 20px; margin-bottom: 20px; }
+        h1 { padding: 20px 0px 0; color: #fff; }
+        h2 { color: #fff; font-size: 16px; }
+        .chart { width: 800px; margin: 0 auto; }
+        .custom { background: #3A475B; padding-top: 0px; }
+        
+        /* css */
+        .c3-tooltip-container { background-color: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 4px 16px 4px; }
+        .tooltip-custom { font-size: 12px; }
+        .tooltip-custom span { color: red; }
+        
+        .c3-grid .c3-xgrid-focus { visibility : hidden !important; }
+        .c3-line { stroke-dasharray: 0; }
+        .c3-ygrid { stroke-dasharray: 2 0; }
+        .c3-grid line { stroke: #dedede; }
+        .c3-texts .c3-text { fill: dodgerblue !important; font-size: 14px; }
+        .c3 .c3-axis-x path, .c3 .c3-axis-x line { stroke: #666; } 
+        .c3 .c3-axis-y path, .c3 .c3-axis-y line { stroke: #fff; } 
+        .c3-axis-y text { font-size:12px; fill: black; }
+        .c3-axis-x text { font-size:12px; fill: black; }
+        
+        .c3-shapes-data4 circle { stroke: darkgray !important; }
+        
+        .js { padding: 0; border-radius: 0; }
+        .fullcode { font-size: 12px; }
+        .option { font-size: 13px; }
+    </style>
+</head>
+<body>
+    <h1>Composite Chart</h1>
+    <section>
+        <div class="chart composite"></div>
+    </section>
+    
+    <h2>Default</h2>
+    <section class="js option">
+        <pre class="language-js"><code class="language-js">var chart = c3.generate({ ... });</code></pre>
+    </section>
+    
+    <h2>Oprion - data</h2>
+    <section class="js option">
+        <pre class="language-js"><code class="language-js">1. "types"
+type: 'line', // 기본 차트 타입은 line
+types: {
+    // 특정 데이터만 bar 타입으로 변경 가능
+    'data2': 'bar',
+    'data3': 'bar'
+},
+groups: [
+    ['data2','data3'] // data2 와 data3을 그룹으로 묶음
+]</code></pre>
+    </section>
+    
+    <h2>Oprion - color</h2>
+    <section class="js option">
+        <pre class="language-js"><code class="language-js">1. "color"
+color: {
+    // 각 데이터 차트의 컬러를 지정하며, data2의 컬러는 'transparent' 투명처리함. 
+    pattern: ['dodgerblue', 'transparent', '#f1f1f1', 'darkgray'] 
+}</code></pre>
+    </section>
+    
+     <h2>Code review</h2>
+    <section class="js fullcode">
+        <pre class="language-javascript">
+            <code class="language-javascript">var chart = c3.generate({
+bindto: '.composite',
+size: {
+    height: 360,
+    width: 800
+},
+onrendered: function() {
+    d3.selectAll('.c3-text').each(function(d) {
+        if ( d == undefined ){
+            return;
+        }else{
+            if ( d.value &gt; 0 ){ 
+                $('.c3-texts .c3-text-' + d.index).css('transform','translate(0, 25px)');
+            }else{
+                $('.c3-texts .c3-text-' + d.index).css('transform','translate(0, -5px)');
+            }
+        }
+    });
+    this.getCircles().style({'fill':'#fff', 'stroke':'dodgerblue'});
+},
+data: {
+    x : 'x',
+    columns: [
+        ['x', '2010', '2011', '2012', '2013', '2014', '2015', '2016'],
+        ['data1', 2800, 3400, 4000, 4800, 5600, 6400, 7700], //avg
+        ['data2', 1000, 1200, 2000, 2500, 3000, 3800, 4800], //min 
+        ['data3', 3600, 4300, 4200, 4800, 5000, 5200, 6000],  // max
+        ['data4', 3200, 3800, 4400, 5600, 6200, 7000, 8000] // 동종업계 avg
+    ],
+    type: 'line',
+    types: {
+        'data2': 'bar',
+        'data3': 'bar'
+    },
+    groups: [
+        ['data2','data3']
+    ],
+    labels: {
+        format: {
+            data1: d3.format('')
+        }
+    }
+},
+axis: {
+    x: {
+        type: 'category',
+        tick: {
+          centered: true,
+          outer: false
+        }
+    },
+    y: {
+        max: 10000,
+        min: 0,
+        tick: {
+            count: 8,
+            // format: d3.format('d') // 정수만 표현
+            format: function (d) { return Math.round(d); }
+        },
+        padding: {top:0, bottom:0}
+    }
+},
+bar:{
+   width: {
+       ratio: 0.35
+   }
+},
+tooltip: {
+    contents: function (d, defaultTitleFormat, defaultValueFormat, color) {
+        return "&lt;div class='tooltip-custom'&gt;최소 3,000 ~ 최대 8,000이상&lt;br&gt;전년비 &lt;span&gt;6%&lt;/span&gt;&lt;/div&gt;"
+    }
+},
+grid: {
+    lines: {
+        front: true
+    },
+    y: {
+        show:true
+    },
+    x: {
+        show: false
+    },
+},
+point: {
+    r: 4,
+    focus: {
+        expand: {
+            enabled: false
+        }
+    }
+},
+color: {
+    pattern: ['dodgerblue', 'transparent', '#f1f1f1', 'darkgray']
+},
+legend: {
+  hide: true
+}
+});
+            </code>
+        </pre>
+    </section>
+    <script type="text/javascript" src="./composite.js"></script>
+</body>
+</html>
