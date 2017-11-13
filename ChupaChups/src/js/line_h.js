@@ -98,7 +98,7 @@
 
         $container.css({
             'background-color':options.svgBackgroundColor,
-            'padding':'20px',
+            // 'padding':'20px',
             'position':'relative',
             'width':options.svgWidth,
             'margin':'0 auto'
