@@ -1,6 +1,6 @@
 var option = {
     data: ['data', '신입', '최소', '평균', '최대'],
-    yAxis: [['lineData-0', 0, 2600, 2800, 3800, 6300], ['lineData-1', 2500, 4000, 3500, 4800, 5480], ['lineData-2', 2800, 3600, 4000, 5800, 6000], ['lineData-3', 2800, 3400, 5000, 6800, 6120], ['lineData-4', 4800, 4400, 4650, 6460, 5220]],
+    yAxis: [['lineData-0', 500], ['lineData-1', 600], ['lineData-2', 1245], ['lineData-3', 548], ['lineData-4', 11]],
     svgWidth: 960,
     svgHeight: 360,
     svgBackgroundColor: '#FFF',
