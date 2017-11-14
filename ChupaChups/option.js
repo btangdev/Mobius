@@ -281,3 +281,5 @@ c3_chart_internal_fn.getDefaultConfig = function () {
 
     return config;
 };
+
+// test
