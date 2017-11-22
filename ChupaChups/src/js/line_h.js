@@ -1,16 +1,11 @@
 (function(root, factory) {
     var version = {chupachups: '1.0.0'};
+
     root.uit = root.uit || {};
     root.uit.version = root.uit.version || {};
-    if (typeof Object.assign == 'function') {
-        // console.log('assign');
-        root.uit = Object.assign(root.uit, factory(jQuery));
-        root.uit.version = Object.assign(root.uit.version, version);
-    } else {
-        // console.log('jQuery');
-        root.uit = jQuery.extend(root.uit, factory(jQuery));
-        root.uit.version = jQuery.extend(root.uit.version, version);
-    }
+
+    root.uit = jQuery.extend(root.uit, factory(jQuery));
+    root.uit.version = jQuery.extend(root.uit.version, version);
 })(this, function($) {
     'use strict';
 
@@ -84,53 +79,53 @@
         }
 
         var c = this,
-            options =$.extend(defaultOptions, options), // o=options
+            // options =$.extend(defaultOptions, options), // o=options
             $container = $(container), // =$target 
             // container = $thisTarget
             $dataLabel = options.data[0],
-            $yAxisLabel = [];
+            yAxisLabel = [];
 
-        c.options = options;
+        c.options = $.extend(defaultOptions, options);
 
-        for ( var i = 0; i < options.yAxis.length; i++ ){
-            $yAxisLabel.push(options.yAxis[i][0]);
+        for ( var i = 0; i < c.options.yAxis.length; i++ ){
+            yAxisLabel.push(c.options.yAxis[i][0]);
         }
 
         $container.css({
-            'background-color':options.svgBackgroundColor,
+            'background-color':c.options.svgBackgroundColor,
             // 'padding':'20px',
             'position':'relative',
-            'width':options.svgWidth,
+            'width':c.options.svgWidth,
             'margin':'0 auto'
         });
 
         var yDataArr=[];
-        yDataArr[0]=options.data;
-        for (var j = 0; j < options.yAxis.length; j++){
-            yDataArr[j+1] =options.yAxis[j];
+        yDataArr[0]=c.options.data;
+        for (var j = 0; j < c.options.yAxis.length; j++){
+            yDataArr[j+1] =c.options.yAxis[j];
         }
 
         var chart = c3.generate({
             bindto: container,
             size: {
-                width: options.svgWidth,
-                height: options.svgHeight
+                width: c.options.svgWidth,
+                height: c.options.svgHeight
             },
             onrendered: function() {
                 var i = 0;
-                $container.find('svg').css('background-color', options.svgBackgroundColor);
-                if ( options.labelPosition ){
-                    for ( i; i < $yAxisLabel.length; i++ ){
-                        d3.selectAll('.c3-texts-' + $yAxisLabel[i] + ' .c3-text').each(function(d) {
+                $container.find('svg').css('background-color', c.options.svgBackgroundColor);
+                if ( c.options.labelPosition ){
+                    for ( i; i < yAxisLabel.length; i++ ){
+                        d3.selectAll('.c3-texts-' + yAxisLabel[i] + ' .c3-text').each(function(d) {
                             if ( d === undefined ) return;
-                            d.value > options.dataLabelDiv ? getDataLabelDiv( d, options.dataLabel_up, i ) : getDataLabelDiv( d, options.dataLabel_down, i );
+                            d.value > c.options.dataLabelDiv ? getDataLabelDiv( d, c.options.dataLabel_up, i ) : getDataLabelDiv( d, c.options.dataLabel_down, i );
                         });
                     }
                 }
 
-                if ( options.zeroValue ){
-                    for ( i; i < $yAxisLabel.length; i++ ){
-                        d3.selectAll(container + ' .c3-texts-' + $yAxisLabel[i] + ' .c3-text').each(function(d) {
+                if ( c.options.zeroValue ){
+                    for ( i; i < yAxisLabel.length; i++ ){
+                        d3.selectAll(container + ' .c3-texts-' + yAxisLabel[i] + ' .c3-text').each(function(d) {
                             getDataLabelVal(d, i);
                         });
                     }
@@ -138,12 +133,12 @@
 
                 var rectLength = $(container).find('.c3-event-rects-single rect').css('fill-opacity', 0.4);
 
-                if ( options.rectView ){
+                if ( c.options.rectView ){
                     $(container).find('.c3-event-rects-single rect').each(function(i){
                         var cls = $(this).attr('class').split(' ');
                         var clsNum = cls[cls.length-1];
-                        $(container).find('.c3-event-rects-single rect:odd').attr('fill',options.rectOddColor);
-                        $(container).find('.c3-event-rects-single rect:even').attr('fill',options.rectEvenColor);
+                        $(container).find('.c3-event-rects-single rect:odd').attr('fill', c.options.rectOddColor);
+                        $(container).find('.c3-event-rects-single rect:even').attr('fill', c.options.rectEvenColor);
                     });
                 }else{
                     $(container).find('.c3-event-rects-single rect:odd').attr('fill', 'transparent');
@@ -151,72 +146,72 @@
                 }
 
                 function getDataLabelDiv( d, val, i ){
-                    $('.c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).css('transform','translate(0, '+ val +'px)');
+                    $('.c3-texts-' + yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).css('transform','translate(0, '+ val +'px)');
                 }
 
                 function getDataLabelVal( d, i ){
                     if ( d.value === 0 ) {
-                        $(container + ' .c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text('');
+                        $(container + ' .c3-texts-' + yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text('');
                     }else{
-                        var t =$(container + ' .c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text();
-                        $(container + ' .c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text(t + options.format);
+                        var t =$(container + ' .c3-texts-' + yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text();
+                        $(container + ' .c3-texts-' + yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text(t + c.options.format);
                     }
                 }
 
-                for ( i = 0; i < options.pointStrokeColor.length; i++ ){
-                    d3.selectAll( $(container + ' .c3-target-' + $yAxisLabel[i] + ' circle')).each(function(d){
-                        $(container + ' .c3-target-' + $yAxisLabel[i] + ' circle.c3-circle-'+d.index).css('stroke', options.pointStrokeColor[i]);
+                for ( i = 0; i < c.options.pointStrokeColor.length; i++ ){
+                    d3.selectAll( $(container + ' .c3-target-' + yAxisLabel[i] + ' circle')).each(function(d){
+                        $(container + ' .c3-target-' + yAxisLabel[i] + ' circle.c3-circle-'+d.index).css('stroke', c.options.pointStrokeColor[i]);
                     });
                 }
 
-                this.getCircles().style({'fill': options.pointFillColor});
+                this.getCircles().style({'fill': c.options.pointFillColor});
 
-                $(container + ' .c3-texts .c3-text').css({'fill': options.dataLabelColor, 'font-size': options.dataLabelFontSize });
-                $(container + ' .c3-axis-x path').css('stroke', options.axis_x_color);
-                $(container + ' .c3-axis-x line').css('stroke', options.axis_x_color);
-                $(container + ' .c3-axis-y path').css('stroke', options.axis_y_color);
-                $(container + ' .c3-axis-y line').css('stroke', options.axis_y_color);
-                $(container + ' .c3-axis-x .tick text').attr('y', options.axis_x_positionY);
-                $(container + ' .c3-axis-y .tick text').attr('y', options.axis_y_positionY);
-                $(container + ' .c3-axis-y .tick line').css('stroke', options.axis_y_tick_line);
-                $(container + ' .c3-axis-x .tick line').css('stroke', options.axis_x_tick_line);
+                $(container + ' .c3-texts .c3-text').css({'fill': c.options.dataLabelColor, 'font-size': c.options.dataLabelFontSize });
+                $(container + ' .c3-axis-x path').css('stroke', c.options.axis_x_color);
+                $(container + ' .c3-axis-x line').css('stroke', c.options.axis_x_color);
+                $(container + ' .c3-axis-y path').css('stroke', c.options.axis_y_color);
+                $(container + ' .c3-axis-y line').css('stroke', c.options.axis_y_color);
+                $(container + ' .c3-axis-x .tick text').attr('y', c.options.axis_x_positionY);
+                $(container + ' .c3-axis-y .tick text').attr('y', c.options.axis_y_positionY);
+                $(container + ' .c3-axis-y .tick line').css('stroke', c.options.axis_y_tick_line);
+                $(container + ' .c3-axis-x .tick line').css('stroke', c.options.axis_x_tick_line);
                 $(container + ' .c3-line').css('stroke-dasharray', '0');
-                $(container + ' .c3-ygrid').css('stroke-dasharray', options.dasharrayY);
-                $(container + ' .c3-xgrid').css('stroke-dasharray', options.dasharrayX);
-                $(container + ' .c3-grid line').css('stroke', options.gridLineColor);
-                $(container + ' .c3-axis-y text').css({'font-size': options.axis_y_font_size, 'fill': options.axis_y_font_color});
-                $(container + ' .c3-axis-x text').css({'font-size': options.axis_x_font_size, 'fill': options.axis_x_font_color});
+                $(container + ' .c3-ygrid').css('stroke-dasharray', c.options.dasharrayY);
+                $(container + ' .c3-xgrid').css('stroke-dasharray', c.options.dasharrayX);
+                $(container + ' .c3-grid line').css('stroke', c.options.gridLineColor);
+                $(container + ' .c3-axis-y text').css({'font-size': c.options.axis_y_font_size, 'fill': c.options.axis_y_font_color});
+                $(container + ' .c3-axis-x text').css({'font-size': c.options.axis_x_font_size, 'fill': c.options.axis_x_font_color});
             },
             data: {
                 x : $dataLabel,
                 columns: yDataArr,
-                type: options.type,
+                type: c.options.type,
                 regions: {
-                    [$yAxisLabel]: [{
-                        'start' : options.regions_start,
-                        'end': options.regions_end,
-                        'style': options.regions_style
+                    [yAxisLabel]: [{
+                        'start' : c.options.regions_start,
+                        'end': c.options.regions_end,
+                        'style': c.options.regions_style
                     }, {
-                        'start': options.regions_start_2,
-                        'end': options.regions_end_2
+                        'start': c.options.regions_start_2,
+                        'end': c.options.regions_end_2
                     }]
                 },
-                labels: options.label
+                labels: c.options.label
             },
             axis: {
                 x: {
                     type: 'category',
                     tick: {
-                      centered: options.axis_x_tick_center,
-                      outer: options.axis_x_outer
+                      centered: c.options.axis_x_tick_center,
+                      outer: c.options.axis_x_outer
                     }
                 },
                 y: {
-                    max: options.axis_y_max,
-                    min: options.axis_y_min,
+                    max: c.options.axis_y_max,
+                    min: c.options.axis_y_min,
                     tick: {
-                        count: options.axis_y_count,
-                        outer: options.axis_y_outer,
+                        count: c.options.axis_y_count,
+                        outer: c.options.axis_y_outer,
                         format: function (d) { return Math.round(d); }
                     },
                     padding: {top:0, bottom:0}
@@ -224,42 +219,37 @@
             },
             tooltip: {
                 contents: function (d, defaultTitleFormat, defaultValueFormat, color) {
-                    return options.tooltip_custom;
+                    return c.options.tooltip_custom;
                 },
-                show: options.tooltip
+                show: c.options.tooltip
             },
             grid: {
                 y: {
-                    show: options.y_grid
+                    show: c.options.y_grid
                 },
                 x: {
-                    show: options.x_grid
+                    show: c.options.x_grid
                 },
                 focus: {
-                    show: options.focusLine
+                    show: c.options.focusLine
                 }
             },
             point: {
-                r: options.pointRad,
+                r: c.options.pointRad,
                 focus: {
                     expand: {
-                        enabled: options.pointExpand,
-                        r: options.pointRad * options.pointExpandRate
+                        enabled: c.options.pointExpand,
+                        r: c.options.pointRad * c.options.pointExpandRate
                     }
                 }
             },
             color: {
-                pattern: options.colorPattern
+                pattern: c.options.colorPattern
             },
             legend: {
-              show: options.legend
+              show: c.options.legend
             }
         });
-
-        var yDataFormatList = [];
-        for (var k = 0; k < options.yAxis.length; k++){
-            yDataFormatList[k] = $yAxisLabel[k];
-        }
     };
 
     return uit;
