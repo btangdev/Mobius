@@ -763,7 +763,16 @@ if ( option.rectView ){
 <script>
     // init
     // data, yAxis, axis_y_max 필수
-    var cc = new uit.chupachups('#cc', {"data":["data","20세이하","21~25세","26~30세","31~35세","36~40세","41~45세","46~50세","51세이상"],"yAxis":[["lineData-0","0","50","0","50","0","0","0"],["lineData-1","50","60","50","80","50","40","60"],["lineData-2","25","30","70","65","70","20","10"]],"svgWidth":960,"svgHeight":360,"svgBackgroundColor":"#ffffff","dataLabelDiv":6000,"dataLabel_up":35,"dataLabel_down":-10,"label":true,"pointFillColor":"#ffffff","pointStrokeColor":["#ff8759","#61c3af","#359aff"],"pointRad":4,"pointExpand":false,"pointExpandRate":1.75,"colorPattern":["#ff8759","#61c3af","#359aff"],"x_grid":false,"y_grid":true,"legend":false,"regions_start":0,"regions_end":0,"regions_start_2":null,"regions_end_2":null,"regions_style":"dashed","focusLine":false,"axis_x_tick_center":true,"axis_x_outer":false,"axis_y_outer":false,"axis_y_count":5,"axis_y_max":100,"axis_y_min":0,"tooltip":false,"dataLabelColor":"#000000","dataLabelFontSize":14,"axis_y_color":"#ffffff","axis_x_color":"#cccccc","dasharrayX":"2 2","dasharrayY":"0 0","gridLineColor":"#e9e9e9","axis_y_font_size":"12","axis_y_font_color":"#bbbbbb","axis_x_font_size":"12","axis_x_font_color":"#666666","axis_x_positionY":16,"axis_y_positionY":10,"axis_x_tick_line":"#ffffff","axis_y_tick_line":"#ffffff","labelPosition":false,"format":"%","zeroValue":true,"rectView":true,"rectOddColor":"#dddddd","rectEvenColor":"transparent","type":"line"});
+
+    /* 디자인 옵션 */
+    var ccOptions = {"svgWidth":960,"svgHeight":360,"svgBackgroundColor":"#ffffff","dataLabelDiv":6000,"dataLabel_up":35,"dataLabel_down":-10,"label":true,"pointFillColor":"#ffffff","pointStrokeColor":["#ff8759","#61c3af","#359aff"],"pointRad":4,"pointExpand":false,"pointExpandRate":1.75,"colorPattern":["#ff8759","#61c3af","#359aff"],"x_grid":false,"y_grid":true,"legend":false,"regions_start":0,"regions_end":0,"regions_start_2":null,"regions_end_2":null,"regions_style":"dashed","focusLine":false,"axis_x_tick_center":true,"axis_x_outer":false,"axis_y_outer":false,"axis_y_count":5,"axis_y_max":100,"axis_y_min":0,"tooltip":false,"dataLabelColor":"#000000","dataLabelFontSize":14,"axis_y_color":"#ffffff","axis_x_color":"#cccccc","dasharrayX":"2 2","dasharrayY":"0 0","gridLineColor":"#e9e9e9","axis_y_font_size":"12","axis_y_font_color":"#bbbbbb","axis_x_font_size":"12","axis_x_font_color":"#666666","axis_x_positionY":16,"axis_y_positionY":10,"axis_x_tick_line":"#ffffff","axis_y_tick_line":"#ffffff","labelPosition":false,"format":"%","zeroValue":true,"rectView":true,"rectOddColor":"#dddddd","rectEvenColor":"transparent","type":"line"};
+
+    /* 개발 옵션 */
+    ccOptions.data = ["data","20세이하","21~25세","26~30세","31~35세","36~40세","41~45세","46~50세","51세이상"];
+    ccOptions.yAxis = [["lineData-0","0","50","0","50","0","0","0"],["lineData-1","50","60","50","80","50","40","60"],["lineData-2","25","30","70","65","70","20","10"]];
+
+    // console.log(ccOptions);
+    var cc = new uit.chupachups('#cc', ccOptions);
 
     $('.codeView').text(JSON.stringify(cc.options));
 

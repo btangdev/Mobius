@@ -104,6 +104,12 @@
             'margin':'0 auto'
         });
 
+        var yDataArr=[];
+        yDataArr[0]=options.data;
+        for (var j = 0; j < options.yAxis.length; j++){
+            yDataArr[j+1] =options.yAxis[j];
+        }
+
         var chart = c3.generate({
             bindto: container,
             size: {
@@ -183,7 +189,7 @@
             },
             data: {
                 x : $dataLabel,
-                columns: [options.data, options.yAxis[0]],
+                columns: yDataArr,
                 type: options.type,
                 regions: {
                     [$yAxisLabel]: [{
@@ -254,16 +260,6 @@
         for (var k = 0; k < options.yAxis.length; k++){
             yDataFormatList[k] = $yAxisLabel[k];
         }
-
-        var yDataArr=[];
-        yDataArr[0]=options.data;
-        for (var j = 0; j < options.yAxis.length; j++){
-            yDataArr[j+1] =options.yAxis[j];
-        }
-
-        chart.load({
-            columns: yDataArr
-        });
     };
 
     return uit;
