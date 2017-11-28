@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="./libs/semantic.min.css">
@@ -7,10 +7,9 @@
     <script src="./libs/jquery.js"></script>
     <script src="./libs/semantic.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" type="text/css" />
-    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
     <title>C3 Chart</title>
     <style>
+        .dataSetting input[data-check="exclusion"] {width: 46px;margin-left: 3px;}
         .c3-line {stroke-width: 2;}
     </style>
 </head>
@@ -51,14 +50,68 @@
 
             <!-- content -->
             <div class="article">
-                <h1 class="ui header">Line Chart</h1>
-                <div class="sub header">jobkorea line chart style guide</div>
 
                 <div class="ui grid">
-
                     <!-- SVG & DATA setting -->
-                    <div class="four wide column inputForm">
+                    <div class="four wide column inputForm dataSetting">
                         <p>SVG & DATA setting</p>
+
+                        <!-- X Data & Y Data -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">X-data&nbsp;&nbsp;&nbsp;</div>
+                                <input class="data" data-check="exclusion" type="hidden">
+                                <input class="data" data-check="exclusion" type="text">
+                                <input class="data" data-check="exclusion" type="text">
+                                <input class="data" data-check="exclusion" type="text">
+                                <input class="data" data-check="exclusion" type="text">
+                                <input class="data" data-check="exclusion" type="text">
+                                <input class="data" data-check="exclusion" type="text">
+                                <input class="data" data-check="exclusion" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y-data 1</div>
+                                <input class="yAxis_0" data-check="exclusion" type="hidden">
+                                <input class="yAxis_0" data-check="exclusion" type="text">
+                                <input class="yAxis_0" data-check="exclusion" type="text">
+                                <input class="yAxis_0" data-check="exclusion" type="text">
+                                <input class="yAxis_0" data-check="exclusion" type="text">
+                                <input class="yAxis_0" data-check="exclusion" type="text">
+                                <input class="yAxis_0" data-check="exclusion" type="text">
+                                <input class="yAxis_0" data-check="exclusion" type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y-data 2</div>
+                                <input class="yAxis_1" data-check="exclusion" type="hidden">
+                                <input class="yAxis_1" data-check="exclusion" type="text">
+                                <input class="yAxis_1" data-check="exclusion" type="text">
+                                <input class="yAxis_1" data-check="exclusion" type="text">
+                                <input class="yAxis_1" data-check="exclusion" type="text">
+                                <input class="yAxis_1" data-check="exclusion" type="text">
+                                <input class="yAxis_1" data-check="exclusion" type="text">
+                                <input class="yAxis_1" data-check="exclusion" type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y-data 3</div>
+                                <input class="yAxis_2" data-check="exclusion" type="hidden">
+                                <input class="yAxis_2" data-check="exclusion" type="text">
+                                <input class="yAxis_2" data-check="exclusion" type="text">
+                                <input class="yAxis_2" data-check="exclusion" type="text">
+                                <input class="yAxis_2" data-check="exclusion" type="text">
+                                <input class="yAxis_2" data-check="exclusion" type="text">
+                                <input class="yAxis_2" data-check="exclusion" type="text">
+                                <input class="yAxis_2" data-check="exclusion" type="text">
+                            </div>
+                        </div>
+
                         <!-- svg size -->
                         <div class="row">
                             <div class="ui mini labeled input">
@@ -74,48 +127,7 @@
                         <div class="row">
                             <div class="ui mini labeled input">
                                 <div class="ui basic label">svg 배경컬러</div>
-                                <input class="svgBackgroundColor" placeholder="svgBackgroundColor" type="text">
-                            </div>
-                        </div>
-                        <!-- X Data & Y Data -->
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">X축 데이터</div>
-                                <input class="data" placeholder="X축 데이터 값: A, B, C, D..." type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">Y축 데이터 1</div>
-                                <input class="yAxis_0" placeholder="Y축 데이터 값: 100, 200, 300, 400..." type="text">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">Y축 데이터 2</div>
-                                <input class="yAxis_1" placeholder="Y축 데이터 값: 100, 200, 300, 400..." type="text">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">Y축 데이터 3</div>
-                                <input class="yAxis_2" placeholder="Y축 데이터 값: 100, 200, 300, 400..." type="text">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">Y축 데이터 4</div>
-                                <input class="yAxis_3" placeholder="Y축 데이터 값: 100, 200, 300, 400..." type="text">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">Y축 데이터 5</div>
-                                <input class="yAxis_4" placeholder="Y축 데이터 값: 100, 200, 300, 400..." type="text">
+                                <input class="svgBackgroundColor" data-colorpick="true" placeholder="svgBackgroundColor" type="text">
                             </div>
                         </div>
 
@@ -130,15 +142,8 @@
                                 <input class="dataLabel_down" placeholder="그래프 아래 패딩 값" type="text">
                             </div>
                         </div>
-
-                        <!-- graph type -->
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">그래프타입</div>
-                                <input class="type" placeholder="그래프타입" type="text">
-                            </div>
-                        </div>
                     </div>
+
                     <!-- Axis setting -->
                     <div class="four wide column inputForm">
                         <p>Axis setting</p>
@@ -168,22 +173,22 @@
                         <div class="row">
                             <div class="ui mini labeled input">
                                 <div class="ui basic label">x축컬러</div>
-                                <input class="axis_x_color" placeholder="x축컬러" type="text">
+                                <input class="axis_x_color" data-colorpick="true" placeholder="x축컬러" type="text">
                             </div>
                             <div class="ui mini labeled input">
                                 <div class="ui basic label">y축컬러</div>
-                                <input class="axis_y_color" placeholder="y축컬러" type="text">
+                                <input class="axis_y_color" data-colorpick="true" placeholder="y축컬러" type="text">
                             </div>
                         </div>
                         <!-- tick color  -->
                         <div class="row">
                             <div class="ui mini labeled input">
                                 <div class="ui basic label">X축 tick 컬러</div>
-                                <input class="axis_x_tick_line" placeholder="x tick color" type="text">
+                                <input class="axis_x_tick_line" data-colorpick="true" placeholder="x tick color" type="text">
                             </div>
                             <div class="ui mini labeled input">
                                 <div class="ui basic label">Y축 tick 컬러</div>
-                                <input class="axis_y_tick_line" placeholder="y tick color" type="text">
+                                <input class="axis_y_tick_line" data-colorpick="true" placeholder="y tick color" type="text">
                             </div>
                         </div>
                         <!-- axis font size & color  -->
@@ -194,7 +199,7 @@
                             </div>
                             <div class="row ui mini labeled input">
                                 <div class="ui basic label">x axis color</div>
-                                <input class="axis_x_font_color" placeholder="x axis color" type="text">
+                                <input class="axis_x_font_color" data-colorpick="true" placeholder="x axis color" type="text">
                             </div>
                         </div>
                         <div class="row">
@@ -204,7 +209,7 @@
                             </div>
                             <div class="row ui mini labeled input">
                                 <div class="ui basic label">y axis color</div>
-                                <input class="axis_y_font_color" placeholder="y axis color" type="text">
+                                <input class="axis_y_font_color" data-colorpick="true" placeholder="y axis color" type="text">
                             </div>
                         </div>
                         <div class="row">
@@ -251,45 +256,8 @@
                         <div class="row">
                             <div class="ui mini labeled input">
                                 <div class="ui basic label">데이터 라벨 컬러, 사이즈</div>
-                                <input class="dataLabelColor" placeholder="dataLabelColor" type="text">
+                                <input class="dataLabelColor" data-colorpick="true" placeholder="dataLabelColor" type="text">
                                 &nbsp;&nbsp;<input class="dataLabelFontSize" placeholder="dataLabelFontSize" type="text">
-                            </div>
-                        </div>
-
-                        <!-- pointStrokeColor, pointFillColor  -->
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">포인터 보더컬러, 컬러</div>
-                                <input class="pointStrokeColor_0" placeholder="포인터 보더컬러" type="text">
-                                &nbsp;&nbsp;<input class="pointFillColor" placeholder="포인터 컬러" type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">포인터 보더컬러, 컬러</div>
-                                <input class="pointStrokeColor_1" placeholder="포인터 보더컬러" type="text">
-                                &nbsp;&nbsp;<input class="pointFillColor" placeholder="포인터 컬러" type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">포인터 보더컬러, 컬러</div>
-                                <input class="pointStrokeColor_0" placeholder="포인터 보더컬러" type="text">
-                                &nbsp;&nbsp;<input class="pointFillColor" placeholder="포인터 컬러" type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">포인터 보더컬러, 컬러</div>
-                                <input class="pointStrokeColor_1" placeholder="포인터 보더컬러" type="text">
-                                &nbsp;&nbsp;<input class="pointFillColor" placeholder="포인터 컬러" type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">포인터 보더컬러, 컬러</div>
-                                <input class="pointStrokeColor_1" placeholder="포인터 보더컬러" type="text">
-                                &nbsp;&nbsp;<input class="pointFillColor" placeholder="포인터 컬러" type="text">
                             </div>
                         </div>
 
@@ -319,8 +287,20 @@
                         <!-- colorPattern -->
                         <div class="row">
                             <div class="ui mini labeled input">
-                                <div class="ui basic label">colorPattern</div>
-                                <input class="colorPattern" placeholder="colorPattern" type="text">
+                                <div class="ui basic label">colorPattern 1</div>
+                                <input class="colorPattern" data-colorpick="true" data-check="exclusion" placeholder="colorPattern" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">colorPattern 2</div>
+                                <input class="colorPattern" data-colorpick="true" data-check="exclusion" placeholder="colorPattern" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">colorPattern 3</div>
+                                <input class="colorPattern" data-colorpick="true" data-check="exclusion" placeholder="colorPattern" type="text">
                             </div>
                         </div>
                         <!-- Point Expand & Point Expand Rate -->
@@ -359,7 +339,7 @@
                         <div class="row">
                             <div class="ui mini labeled input">
                                 <div class="ui basic label">gridLineColor</div>
-                                <input class="gridLineColor" placeholder="gridLineColor" type="text">
+                                <input class="gridLineColor" data-colorpick="true" placeholder="gridLineColor" type="text">
                             </div>
                         </div>
                         <!-- format -->
@@ -373,7 +353,7 @@
                         <div class="row">
                             <div class="ui mini labeled input">
                                 <div class="ui basic label">rectOddColor</div>
-                                <input type="text" placeholder="rectOddColor" class="rectOddColor">
+                                <input type="text" data-colorpick="true" placeholder="rectOddColor" class="rectOddColor">
                             </div>
                         </div>
                         <!-- rectEvenColor -->
@@ -425,12 +405,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="sixteen wide column inputForm buttonBox">
-                        <button type="button" name="button" class="update ui negative button">UPDATE</button>
-                    </div>
                     <div class="sixteen wide column viewGraph">
                         <div class="chartBox">
-                            <div class="lineChart"></div>
+                            <div id="cc"></div>
                         </div>
                     </div>
                     <h2 class='section'>Option</h2>
@@ -444,7 +421,7 @@
                             <div class="no example">
                                 <h2 class="ui header">Default</h2>
                                 <div class="ui big yellow message">
-                                    <p>$(target).line( {option} );</p>
+                                    <p>var cc = new uit.chupachups('#id', {option});</p>
                                 </div>
 
                                 <h2 class="ui header">options</h2>
@@ -778,356 +755,68 @@ if ( option.rectView ){
         </div>
     </div>
 
-    <!-- <script type="text/javascript" src="./src/js/line.js"></script> -->
-    <script type="text/javascript" src="./src/js/customLine.js"></script>
+    <link rel="stylesheet" media="screen" type="text/css" href="./src/colorpicker/css/colorpicker.css" />
+    <script type="text/javascript" src="./src/colorpicker/js/colorpicker.js"></script>
+    <script type="text/javascript" src="./src/js/line.js"></script>
 
-    <!-- change -->
-    <script>
-        // x grid
-        $("#x_grid").on('change', function(){
-            $(this).is(":checked") ? option.x_grid = true : option.x_grid = false;
-        });
+<script>
+    // init
 
-        // y grid
-        $("#y_grid").on('change', function(){
-            $(this).is(":checked") ? option.y_grid = true : option.y_grid = false;
-        });
+    /* 디자인 옵션 */
+    var ccOptions = {"svgWidth":960,"svgHeight":360,"svgBackgroundColor":"#ffffff","dataLabelDiv":6000,"dataLabel_up":35,"dataLabel_down":-10,"label":true,"pointFillColor":"#ffffff","pointStrokeColor":["#ff8759","#61c3af","#359aff"],"pointRad":4,"pointExpand":false,"pointExpandRate":1.75,"colorPattern":["#ff8759","#61c3af","#359aff"],"x_grid":false,"y_grid":true,"legend":false,"regions_start":0,"regions_end":0,"regions_start_2":null,"regions_end_2":null,"regions_style":"dashed","focusLine":false,"axis_x_tick_center":true,"axis_x_outer":false,"axis_y_outer":false,"axis_y_count":5,"axis_y_max":100,"axis_y_min":0,"tooltip":false,"dataLabelColor":"#000000","dataLabelFontSize":14,"axis_y_color":"#ffffff","axis_x_color":"#cccccc","dasharrayX":"2 2","dasharrayY":"0 0","gridLineColor":"#e9e9e9","axis_y_font_size":"12","axis_y_font_color":"#bbbbbb","axis_x_font_size":"12","axis_x_font_color":"#666666","axis_x_positionY":16,"axis_y_positionY":10,"axis_x_tick_line":"#ffffff","axis_y_tick_line":"#ffffff","labelPosition":false,"format":"%","zeroValue":true,"rectView":true,"rectOddColor":"#dddddd","rectEvenColor":"transparent","type":"line"};
 
-        // pointer expand
-        $("#pointExpand").on('change', function(){
-            $(this).is(":checked") ? option.pointExpand = true : option.pointExpand = false;
-        });
+    /* 개발 옵션 */
+    ccOptions.data = ["data","20세이하","21~25세","26~30세","31~35세","36~40세","41~45세","46~50세","51세이상"];
+    ccOptions.yAxis = [["lineData-0","0","50","0","50","0","0","0"],["lineData-1","50","60","50","80","50","40","60"],["lineData-2","25","30","70","65","70","20","10"]];
 
-        // axis_x_tick_center
-        $("#axis_x_tick_center").on('change', function(){
-            $(this).is(":checked") ? option.axis_x_tick_center = true : option.axis_x_tick_center = false;
-        });
+    // console.log(ccOptions);
+    var cc = new uit.chupachups('#cc', ccOptions);
 
-        // data label sho hide
-        $("#label").on('change', function(){
-            $(this).is(":checked") ? option.label = true : option.label = false;
-        });
+    $('.codeView').text(JSON.stringify(cc.options));
 
-        // axis_x_outer
-        $("#axis_x_outer").on('change', function(){
-            $(this).is(":checked") ? option.axis_x_outer = true : option.axis_x_outer = false;
-        });
-
-        // axis_y_outer
-        $("#axis_y_outer").on('change', function(){
-            $(this).is(":checked") ? option.axis_y_outer = true : option.axis_y_outer = false;
-        });
-
-        // legend
-        $("#legend").on('change', function(){
-            $(this).is(":checked") ? option.legend = true : option.legend = false;
-        });
-
-        // focusLine
-        $("#focusLine").on('change', function(){
-            $(this).is(":checked") ? option.focusLine = true : option.focusLine = false;
-        });
-
-        // tooltip
-        $("#tooltip").on('change', function(){
-            $(this).is(":checked") ? option.tooltip = true : option.tooltip = false;
-        });
-
-        // labelPosition
-        $("#labelPosition").on('change', function(){
-            $(this).is(":checked") ? option.labelPosition = true : option.labelPosition = false;
-        });
-
-        // zeroValue
-        $("#zeroValue").on('change', function(){
-            $(this).is(":checked") ? option.zeroValue = true : option.zeroValue = false;
-        });
-
-        // rectView
-        $("#rectView").on('change', function(){
-            $(this).is(":checked") ? option.rectView = true : option.rectView = false;
-        });
-
-        // default value
-        var df = option.data.shift();
-        // var lf = option.yAxis[0].shift();
-        $(".data").attr('value', option.data);
-        var i = 0;
-        for ( i; i < 5; i++ ){
-            if ( option.yAxis[i] != undefined ){
-                option.yAxis[i].shift();
-                $(".yAxis_"+i).attr('value', option.yAxis[i]);
-            }
+    $('.inputForm input').each(function() {
+        var val = cc.options[this.className];
+        if (this.getAttribute('data-check') !== 'exclusion') {
+            $(this).attr('value', val);
+        } else if (this.className == 'colorPattern') {
+            $(this).attr('value', val[$('.colorPattern').index(this)]);
+        } else if (this.className == 'data') {
+            $(this).attr('value', val[$('.data').index(this)]);
+        } else if (this.className.slice(0, -1) == 'yAxis_') {
+            val = cc.options.yAxis[this.className.replace('yAxis_','')][$('.'+this.className).index(this)] || '';
+            $(this).attr('value', val);
         }
-        $(".colorPattern").attr('value', option.colorPattern);
-        $(".svgWidth").attr('value', option.svgWidth);
-        $(".svgHeight").attr('value', option.svgHeight);
-        $(".svgBackgroundColor").attr('value', option.svgBackgroundColor);
-        $(".dataLabelDiv").attr('value', option.dataLabelDiv);
-        $(".dataLabel_up").attr('value', option.dataLabel_up);
-        $(".dataLabel_down").attr('value', option.dataLabel_down);
-        $(".pointFillColor").attr('value', option.pointFillColor);
-        // $(".pointStrokeColor").attr('value', option.pointStrokeColor);
-        for ( i; i < 5; i++ ){
-            if ( option.pointStrokeColor[i] != undefined ){
-                $(".pointStrokeColor_"+i).attr('value', option.pointStrokeColor[i]);
-            }
+    });
+
+    $('.inputForm input').on('change', function() {
+        if (this.getAttribute('data-check') !== 'exclusion') {
+            cc.options[this.className] = this.value;
+        } else if (this.className == 'colorPattern') {
+            cc.options[this.className][$('.colorPattern').index(this)] = this.value;
+        } else if (this.className == 'data') {
+            cc.options[this.className][$('.data').index(this)] = this.value;
+        } else if (this.className.slice(0, -1) == 'yAxis_') {
+            cc.options.yAxis[this.className.replace('yAxis_','')][$('.'+this.className).index(this)] = this.value;
         }
-        $(".pointRad").attr('value', option.pointRad);
-        $(".pointExpandRate").attr('value', option.pointExpandRate);
-        $(".regions_start").attr('value', option.regions_start);
-        $(".regions_end").attr('value', option.regions_end);
-        $(".regions_start_2").attr('value', option.regions_start_2);
-        $(".regions_end_2").attr('value', option.regions_end_2);
-        $(".axis_y_count").attr('value', option.axis_y_count);
-        $(".axis_y_max").attr('value', option.axis_y_max);
-        $(".axis_y_min").attr('value', option.axis_y_min);
-        $(".dataLabelColor").attr('value', option.dataLabelColor);
-        $(".dataLabelFontSize").attr('value', option.dataLabelFontSize);
-        $(".axis_x_color").attr('value', option.axis_x_color);
-        $(".axis_y_color").attr('value', option.axis_y_color);
-        $(".dasharrayX").attr('value', option.dasharrayX);
-        $(".dasharrayY").attr('value', option.dasharrayY);
-        $(".gridLineColor").attr('value', option.gridLineColor);
-        $(".axis_x_tick_line").attr('value', option.axis_x_tick_line);
-        $(".axis_y_tick_line").attr('value', option.axis_y_tick_line);
-        $(".axis_y_font_size").attr('value', option.axis_y_font_size);
-        $(".axis_y_font_color").attr('value', option.axis_y_font_color);
-        $(".axis_x_font_size").attr('value', option.axis_x_font_size);
-        $(".axis_x_font_color").attr('value', option.axis_x_font_color);
-        $(".axis_x_positionY").attr('value', option.axis_x_positionY);
-        $(".axis_y_positionY").attr('value', option.axis_y_positionY);
-        $(".format").attr('value', option.format);
-        $(".rectOddColor").attr('value', option.rectOddColor);
-        $(".rectEvenColor").attr('value', option.rectEvenColor);
-        $(".type").attr('value', option.type);
 
-        var myJSON = JSON.stringify(option);
-        $(".codeView").text(myJSON);
+        cc = new uit.chupachups('#cc', cc.options);
+        $('.codeView').text(JSON.stringify(cc.options));
+    });
 
-        $target.css({'width': Number($(".svgWidth").val())+'px', 'margin':'0 auto'});
+    $('input[data-colorpick="true"]').ColorPicker({
+        onSubmit: function(hsb, hex, rgb, el) {
+            $(el).val('#'+hex);
+            $(el).ColorPickerHide();
+            $(el).trigger('change');
+        },
+        onBeforeShow: function () {
+            $(this).ColorPickerSetColor(this.value);
+        }
+    })
+    .bind('keyup', function(){
+        $(this).ColorPickerSetColor(this.value);
+    });
+</script>
 
-        $(".update").on('click',function(){
-            option.svgWidth = Number($(".svgWidth").val());
-            option.svgHeight = Number($(".svgHeight").val());
-
-            var i = 0;
-            var xDataList = $('.data').val().split(',');
-            xDataList.unshift("data");
-            option.data = xDataList;
-
-            for ( i; i < 5; i++ ){
-                var yDataList = $('.yAxis_'+i).val().split(',');
-                yDataList.unshift("lineData-"+i);
-                option.yAxis[i] = yDataList;
-            }
-
-            var colorPattern = $('.colorPattern').val().split(',');
-            option.colorPattern = colorPattern;
-            console.log('colorPattern: ', colorPattern);
-
-            option.svgBackgroundColor = $(".svgBackgroundColor").val();
-            option.pointRad = Number($(".pointRad").val());
-            option.pointExpandRate = Number($(".pointExpandRate").val());
-            option.axis_y_count = Number($(".axis_y_count").val());
-            option.axis_y_max = Number($(".axis_y_max").val());
-            option.axis_y_min = Number($(".axis_y_min").val());
-            option.dataLabelColor = $(".dataLabelColor").val();
-            // option.colorPattern = [$('.colorPattern').val()]
-            option.dataLabelFontSize = Number($(".dataLabelFontSize").val());
-            option.dataLabelDiv = Number($(".dataLabelDiv").val());
-            option.dataLabel_up = Number($(".dataLabel_up").val());
-            option.dataLabel_down = Number($(".dataLabel_down").val());
-            option.pointFillColor = $(".pointFillColor").val();
-            option.axis_x_color = $(".axis_x_color").val();
-            option.axis_y_color = $(".axis_y_color").val();
-            option.dasharrayX = $(".dasharrayX").val();
-            option.dasharrayY = $(".dasharrayY").val();
-            option.gridLineColor = $(".gridLineColor").val();
-            option.axis_x_tick_line = $(".axis_x_tick_line").val();
-            option.axis_y_tick_line = $(".axis_y_tick_line").val();
-            option.axis_y_font_size = $(".axis_y_font_size").val();
-            option.axis_y_font_color = $(".axis_y_font_color").val();
-            option.axis_x_font_size = $(".axis_x_font_size").val();
-            option.axis_x_font_color = $(".axis_x_font_color").val();
-            option.axis_x_positionY = Number($(".axis_x_positionY").val());
-            option.axis_y_positionY = Number($(".axis_y_positionY").val());
-            option.regions_start = Number($(".regions_start").val());
-            option.regions_end = Number($(".regions_end").val());
-            option.regions_start_2 = Number($(".regions_start_2").val());
-            option.regions_end_2 = Number($(".regions_end_2").val());
-            option.tooltip_custom = $(".tooltip_custom").val();
-            option.format = $(".format").val();
-            option.rectOddColor = $(".rectOddColor").val();
-            option.rectEvenColor = $(".rectEvenColor").val();
-            option.type = $(".type").val();
-
-            var chart = c3.generate({
-                bindto: $thisTarget,
-                size: {
-                    width: option.svgWidth,
-                    height: option.svgHeight
-                },
-                onrendered: function() {
-                    var i = 0;
-                    $target.find('svg').css('background-color', option.svgBackgroundColor);
-                    if ( option.labelPosition ){
-                        for ( i; i < $yAxisLabel.length; i++ ){
-                            d3.selectAll('.c3-texts-' + $yAxisLabel[i] + ' .c3-text').each(function(d) {
-                                if ( d === undefined ) return;
-                                d.value > option.dataLabelDiv ? getDataLabelDiv( d, option.dataLabel_up, i ) : getDataLabelDiv( d, option.dataLabel_down, i );
-                            });
-                        }
-                    }
-
-                    if ( option.zeroValue ){
-                        for ( i; i < $yAxisLabel.length; i++ ){
-                            d3.selectAll($thisTarget + ' .c3-texts-' + $yAxisLabel[i] + ' .c3-text').each(function(d) {
-                                getDataLabelVal(d, i);
-                            });
-                        }
-                    }
-
-                    var rectLength = $($thisTarget).find('.c3-event-rects-single rect').css('fill-opacity', 0.4);
-
-                    if ( option.rectView ){
-                        $($thisTarget).find('.c3-event-rects-single rect').each(function(i){
-                            var cls = $(this).attr('class').split(' ');
-                            var clsNum = cls[cls.length-1];
-                            $($thisTarget).find('.c3-event-rects-single rect:odd').attr('fill',option.rectOddColor);
-                            $($thisTarget).find('.c3-event-rects-single rect:even').attr('fill',option.rectEvenColor);
-                        });
-                    }else{
-                        $($thisTarget).find('.c3-event-rects-single rect:odd').attr('fill', 'transparent');
-                        $($thisTarget).find('.c3-event-rects-single rect:even').attr('fill', 'transparent');
-                    }
-
-                    function getDataLabelDiv( d, val, i ){
-                        $('.c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).css('transform','translate(0, '+ val +'px)');
-                    }
-
-                    function getDataLabelVal( d, i ){
-                        if ( d.value === 0 ) {
-                            $($thisTarget + ' .c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text('');
-                        }else{
-                            var t =$($thisTarget + ' .c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text();
-                            $($thisTarget + ' .c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text(t + option.format);
-                        }
-                    }
-
-                    for ( i = 0; i < option.pointStrokeColor.length; i++ ){
-                        d3.selectAll( $($thisTarget + ' .c3-target-' + $yAxisLabel[i] + ' circle')).each(function(d){
-                            $($thisTarget + ' .c3-target-' + $yAxisLabel[i] + ' circle.c3-circle-'+d.index).css('stroke', option.pointStrokeColor[i]);
-                            console.log(option.pointStrokeColor[i]);
-                        });
-                    }
-
-                    this.getCircles().style({'fill': option.pointFillColor});
-
-                    // console.log($thisTarget, $dataLabel);
-                    $($thisTarget + ' .c3-texts .c3-text').css({'fill': option.dataLabelColor, 'font-size': option.dataLabelFontSize });
-                    $($thisTarget + ' .c3-axis-x path').css('stroke', option.axis_x_color);
-                    $($thisTarget + ' .c3-axis-x line').css('stroke', option.axis_x_color);
-                    $($thisTarget + ' .c3-axis-y path').css('stroke', option.axis_y_color);
-                    $($thisTarget + ' .c3-axis-y line').css('stroke', option.axis_y_color);
-                    $($thisTarget + ' .c3-axis-x .tick text').attr('y', option.axis_x_positionY);
-                    $($thisTarget + ' .c3-axis-y .tick text').attr('y', option.axis_y_positionY);
-                    $($thisTarget + ' .c3-axis-y .tick line').css('stroke', option.axis_y_tick_line);
-                    $($thisTarget + ' .c3-axis-x .tick line').css('stroke', option.axis_x_tick_line);
-                    $($thisTarget + ' .c3-line').css('stroke-dasharray', '0');
-                    $($thisTarget + ' .c3-ygrid').css('stroke-dasharray', option.dasharrayY);
-                    $($thisTarget + ' .c3-xgrid').css('stroke-dasharray', option.dasharrayX);
-                    $($thisTarget + ' .c3-grid line').css('stroke', option.gridLineColor);
-                    $($thisTarget + ' .c3-axis-y text').css({'font-size': option.axis_y_font_size, 'fill': option.axis_y_font_color});
-                    $($thisTarget + ' .c3-axis-x text').css({'font-size': option.axis_x_font_size, 'fill': option.axis_x_font_color});
-                },
-                data: {
-                    x : $dataLabel,
-                    columns: [option.data, option.yAxis[0]],
-                    type: option.type,
-                    regions: {
-                        [$yAxisLabel]: [{
-                            'start' : option.regions_start,
-                            'end': option.regions_end,
-                            'style': option.regions_style
-                        }, {
-                            'start': option.regions_start_2,
-                            'end': option.regions_end_2
-                        }]
-                    },
-                    labels: option.label
-                },
-                axis: {
-                    x: {
-                        type: 'category',
-                        tick: {
-                          centered: option.axis_x_tick_center,
-                          outer: option.axis_x_outer
-                        }
-                    },
-                    y: {
-                        max: option.axis_y_max,
-                        min: option.axis_y_min,
-                        tick: {
-                            count: option.axis_y_count,
-                            outer: option.axis_y_outer,
-                            format: function (d) { return Math.round(d); }
-                        },
-                        padding: {top:0, bottom:0}
-                    }
-                },
-                tooltip: {
-                    contents: function (d, defaultTitleFormat, defaultValueFormat, color) {
-                        return option.tooltip_custom;
-                    },
-                    show: option.tooltip
-                },
-                grid: {
-                    y: {
-                        show: option.y_grid
-                    },
-                    x: {
-                        show: option.x_grid
-                    },
-                    focus: {
-                        show: option.focusLine
-                    }
-                },
-                point: {
-                    r: option.pointRad,
-                    focus: {
-                        expand: {
-                            enabled: option.pointExpand,
-                            r: option.pointRad * option.pointExpandRate
-                        }
-                    }
-                },
-                color: {
-                    pattern: option.colorPattern
-                },
-                legend: {
-                  show: option.legend
-                }
-            });
-
-            var yDataFormatList = [];
-            for (var k = 0; k < option.yAxis.length; k++){
-                yDataFormatList[k] = $yAxisLabel[k];
-            }
-
-            var yDataArr=[];
-            yDataArr[0]=option.data;
-            for (var j = 0; j < option.yAxis.length; j++){
-                yDataArr[j+1] =option.yAxis[j];
-            }
-
-            chart.load({
-                columns: yDataArr
-            });
-
-            var myJSON = JSON.stringify(option);
-            $(".codeView").text(myJSON);
-        });
-    </script>
 </body>
 </html>
