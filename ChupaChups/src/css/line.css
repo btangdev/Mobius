@@ -79,3 +79,5 @@ input.rectOddColor { width: 183px; }
 input.rectEvenColor { width: 180px; }
 input.dasharrayX { width: 58px; }
 input.dasharrayY { width: 58px; }
+
+.pieLabel { fill: #000!important; }
