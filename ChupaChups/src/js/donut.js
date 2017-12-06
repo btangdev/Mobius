@@ -48,6 +48,7 @@
                         d3.select('svg').select(section+i)
                             .append('text')
                             .attr('class','pieLabel')  
+                            .style("fill", "white")
                             .style('font-size','14')
                             .attr("x", function(d) {
                                 var angle = d.startAngle + (d.endAngle - d.startAngle)/2 - Math.PI/2;
@@ -71,12 +72,12 @@
                                 .append("path")
                                 .attr("class", "labelPointer")
                                 .style("fill", "none")
-                                .style("stroke", "none")
+                                .style("stroke", "gray")
                                 .attr("d", function(d) {
                                     if(d.cx > d.ox) {
-                                        return "M" + d.sx + "," + d.sy + "L" + d.ox + "," + d.oy + " " + d.cx + "," + d.cy;
+                                        // return "M" + d.sx + "," + d.sy + "L" + d.ox + "," + d.oy + " " + d.cx + "," + d.cy;
                                     } else {
-                                        return "M" + d.ox + "," + d.oy + "L" + d.sx + "," + d.sy + " " + d.cx + "," + d.cy;
+                                        // return "M" + d.ox + "," + d.oy + "L" + d.sx + "," + d.sy + " " + d.cx + "," + d.cy;
                                     }
                                 });
                     }
@@ -84,29 +85,7 @@
                 onrendered: function() {
                     var pie = d3.select('g.c3-chart-arcs')
                     var translate = d3.select('g.c3-chart-arcs').attr('transform');
-                    var isDataView = null;
-                    var section = 'g.c3-chart-arc.c3-target.c3-target-pieData-';
-                    
                     pie.attr('transform',translate + ' scale(0.85)');
-
-                    for ( var i = 0; i < options.colorPattern.length; i++ ){
-                            isDataView = $($thisTarget + ' ' + section + i).find('text').first().text();
-                            if (isDataView === '') {
-                                var dx = $($thisTarget + ' '+ section + i).find('text.pieLabel').attr('x');
-                                d3.select('svg').select(section + i + ' text.pieLabel').attr('x', Number(dx)-70);
-
-                                d3.select('svg').select(section + i + ' path.labelPointer')
-                                    .style("stroke", "gray")
-                                    .attr("d", function(d) {
-                                        return "M" + d.sx + "," + d.sy + "L" + d.ox + "," + d.oy + " " + d.cx + "," + d.cy;
-                                        // if(d.cx > d.ox) {
-                                        //     return "M" + d.sx + "," + d.sy + "L" + d.ox + "," + d.oy + " " + d.cx + "," + d.cy;
-                                        // } else {
-                                        //     return "M" + d.ox + "," + d.oy + "L" + d.sx + "," + d.sy + " " + d.cx + "," + d.cy;
-                                        // }
-                                    });
-                            }
-                    }
                 },
                 data: {
                     columns: yDataArr,
