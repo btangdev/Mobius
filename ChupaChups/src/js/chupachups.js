@@ -101,6 +101,7 @@
                 defaultOptions = $.extend({}, defaultOptions, lineOptions);
                 break;
             case "donut":
+            case "pie":
                 defaultOptions = $.extend({}, defaultOptions, donutOptions);
                 break;
             default:
@@ -276,9 +277,10 @@
                 };
                 break;
             case "donut":
+            case "pie":
                 chartOptions = {
                     interaction: {
-                        enabled: false
+                        enabled: true
                     },
                     bindto: container,
                     size: {
@@ -312,11 +314,6 @@
                                     d.ox = d.x + bbox.width/2 - 5 ;
                                     d.sy = d.oy = d.y - 5;
                                 });
-                            d3.select('svg').select(section+i)
-                                .append("path")
-                                .attr("class", "labelPointer")
-                                .style("fill", "none")
-                                .style("stroke", "gray");
                         }
                     },
                     onrendered: function() {

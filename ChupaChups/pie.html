@@ -9,8 +9,14 @@
     <script src="./libs/semantic.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" type="text/css" />
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script> -->
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
     <title>C3 Chart</title>
+    <style>
+        .dataSetting input[data-check="exclusion"] {width: 46px;margin-left: 3px;}
+        .c3-line {stroke-width: 2;}
+    </style>
 </head>
 <body id="guide">
     <div class="pusher">
@@ -48,14 +54,63 @@
 
             <!-- content -->
             <div class="article">
-                <h1 class="ui header">PIE Chart</h1>
-                <div class="sub header">jobkorea line chart style guide</div>
-
                 <div class="ui grid">
-
                     <!-- SVG & DATA setting -->
-                    <div class="four wide column inputForm">
+                    <div class="eight wide column inputForm dataSetting">
                         <p>SVG & DATA setting</p>
+
+                        <!-- X Data & Y Data -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">X-data&nbsp;&nbsp;&nbsp;</div>
+                                <input class="data" data-check="exclusion" type="hidden">
+                                <input class="data" data-check="exclusion" type="text">
+                                <input class="data" data-check="exclusion" type="text">
+                                <input class="data" data-check="exclusion" type="text">
+                                <input class="data" data-check="exclusion" type="text">
+                                <input class="data" data-check="exclusion" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y-data 1</div>
+                                <input class="yAxis_0" data-check="exclusion" type="hidden">
+                                <input class="yAxis_0" data-check="exclusion" type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y-data 2</div>
+                                <input class="yAxis_1" data-check="exclusion" type="hidden">
+                                <input class="yAxis_1" data-check="exclusion" type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y-data 3</div>
+                                <input class="yAxis_2" data-check="exclusion" type="hidden">
+                                <input class="yAxis_2" data-check="exclusion" type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y-data 4</div>
+                                <input class="yAxis_3" data-check="exclusion" type="hidden">
+                                <input class="yAxis_3" data-check="exclusion" type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y-data 5</div>
+                                <input class="yAxis_4" data-check="exclusion" type="hidden">
+                                <input class="yAxis_4" data-check="exclusion" type="text">
+                            </div>
+                        </div>
+
                         <!-- svg size -->
                         <div class="row">
                             <div class="ui mini labeled input">
@@ -71,113 +126,57 @@
                         <div class="row">
                             <div class="ui mini labeled input">
                                 <div class="ui basic label">svg 배경컬러</div>
-                                <input class="svgBackgroundColor" placeholder="svgBackgroundColor" type="text">
-                            </div>
-                        </div>
-                        <!-- X Data & Y Data -->
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">Label 데이터</div>
-                                <input class="data" placeholder="X축 데이터 값: A, B, C, D..." type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">Y축 데이터 1</div>
-                                <input class="yAxis_0" placeholder="Y축 데이터 값: 100, 200, 300, 400..." type="text">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">Y축 데이터 2</div>
-                                <input class="yAxis_1" placeholder="Y축 데이터 값: 100, 200, 300, 400..." type="text">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">Y축 데이터 3</div>
-                                <input class="yAxis_2" placeholder="Y축 데이터 값: 100, 200, 300, 400..." type="text">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">Y축 데이터 4</div>
-                                <input class="yAxis_3" placeholder="Y축 데이터 값: 100, 200, 300, 400..." type="text">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">Y축 데이터 5</div>
-                                <input class="yAxis_4" placeholder="Y축 데이터 값: 100, 200, 300, 400..." type="text">
-                            </div>
-                        </div>
-
-
-                        <!-- graph type -->
-                        <div class="row">
-                            <div class="ui mini labeled input">
-                                <div class="ui basic label">그래프타입</div>
-                                <input class="type" placeholder="그래프타입" type="text">
+                                <input class="svgBackgroundColor" data-colorpick="true" placeholder="svgBackgroundColor" type="text">
                             </div>
                         </div>
                     </div>
                     <!-- Graph setting -->
-                    <div class="four wide column inputForm">
+                    <div class="eight wide column inputForm">
                         <p>Graph setting</p>
+                        <!-- Data label dataLabelColor & dataLabelFontSize -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">데이터 라벨 컬러, 사이즈</div>
+                                <input class="dataLabelColor" data-colorpick="true" placeholder="dataLabelColor" type="text">
+                                &nbsp;&nbsp;<input class="dataLabelFontSize" placeholder="dataLabelFontSize" type="text">
+                            </div>
+                        </div>
 
                         <!-- colorPattern -->
                         <div class="row">
                             <div class="ui mini labeled input">
-                                <div class="ui basic label">colorPattern</div>
-                                <input class="colorPattern" placeholder="colorPattern" type="text">
+                                <div class="ui basic label">colorPattern 1</div>
+                                <input class="colorPattern" data-colorpick="true" data-check="exclusion" placeholder="colorPattern" type="text">
                             </div>
                         </div>
-
-                        <!-- tooltip -->
-                        <div class="row">
-                            <!-- <div class="ui mini labeled input">
-                                <div class="ui basic label">tooltip_custom</div>
-                                <input type="text" disabled placeholder="tooltip_custom" class="tooltip_custom">
-                            </div> -->
-                            <div class="ui checkbox">
-                                <input class="" id="tooltip" type="checkbox" name="tooltip"><label for="tooltip">tooltip</label>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Grid & label setting -->
-                    <div class="four wide column inputForm">
-                        <p>Grid & label setting</p>
-                        <!-- format -->
                         <div class="row">
                             <div class="ui mini labeled input">
-                                <div class="ui basic label">format</div>
-                                <input type="text" placeholder="format" class="format">
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <!-- legend -->
-                            <div class="ui checkbox">
-                                <input class="legend" id="legend" type="checkbox"><label for="legend">legend</label>
+                                <div class="ui basic label">colorPattern 2</div>
+                                <input class="colorPattern" data-colorpick="true" data-check="exclusion" placeholder="colorPattern" type="text">
                             </div>
                         </div>
                         <div class="row">
-                            <!-- labelPosition -->
-                            <div class="ui checkbox">
-                                <input class="" id="labelPosition" type="checkbox" name="labelPosition"><label for="labelPosition">labelPosition</label>
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">colorPattern 3</div>
+                                <input class="colorPattern" data-colorpick="true" data-check="exclusion" placeholder="colorPattern" type="text">
                             </div>
                         </div>
-                    </div>
-                    <div class="sixteen wide column inputForm buttonBox">
-                        <button type="button" name="button" class="update ui negative button">UPDATE</button>
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">colorPattern 4</div>
+                                <input class="colorPattern" data-colorpick="true" data-check="exclusion" placeholder="colorPattern" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">colorPattern 5</div>
+                                <input class="colorPattern" data-colorpick="true" data-check="exclusion" placeholder="colorPattern" type="text">
+                            </div>
+                        </div>
                     </div>
                     <div class="sixteen wide column viewGraph">
                         <div class="chartBox">
-                            <div class="pieChart"></div>
+                            <div id="cc"></div>
                         </div>
                     </div>
                     <h2 class='section'>Option</h2>
@@ -185,338 +184,10 @@
                         <div class="sixteen wide column codeView"></div>
                     </div>
                     <h2 class='section'>Usage</h2>
-
                     <div class="row">
-                        <div class="usage">
-                            <div class="no example">
-                                <h2 class="ui header">Default</h2>
-                                <div class="ui big yellow message">
-                                    <p>$(target).line( {option} );</p>
-                                </div>
-
-                                <h2 class="ui header">options</h2>
-                                <h4 class="ui header">X축 데이터 라벨</h4>
-                                <div>X축 데이터</div>
-                                <div class="ui small message">
-                                    <p>{ 사원, 주임, 대리, 과장, 부장, 차장 }</p>
-                                    <b class="returnValue">String</b>
-                                </div>
-
-                                <h4 class="ui header">Y축 데이터</h4>
-                                <div>Y축 데이터</div>
-                                <div class="ui small message">
-                                    <p>{ 1000, 2000, 3000, 4000, 5000, 6000 }</p>
-                                    <b class="returnValue">Number</b>
-                                </div>
-
-                                <h4 class="ui header">svgWidth, svgHeight</h4>
-                                <div>svg 넓이, svg 높이</div>
-                                <div class="ui small message">
-                                    <p>{ svgWidth: 800, svgHeight: 360 }</p>
-                                    <b class="returnValue">Number</b>
-                                </div>
-
-                                <h4 class="ui header">svgBackgroundColor</h4>
-                                <div>svg 배경컬러</div>
-                                <div class="ui small message">
-                                    <p>{ svgBackgroundColor: "#fff" }</p>
-                                    <b class="returnValue">String</b>
-                                </div>
-
-                                <h4 class="ui header">dataLabelDiv</h4>
-                                <div>데이터라벨 포지션의 기준점. 해당 값을 기준으로 포인터 위, 아래로 라벨값을 출력함.</div>
-                                <div class="ui small message">
-                                    <p>{ dataLabelDiv: 4000 }</p>
-                                    <b class="returnValue">Number</b>
-                                </div>
-
-                                <h4 class="ui header">dataLabel_up, dataLabel_down</h4>
-                                <div>기준점을 중심으로 값이 작으면 <b>dataLabel_up</b>을 사용(라벨을 위로 표시). 값이 크면 <b>dataLabel_down</b>사용(라벨을 아래로 표시)</div>
-                                <div class="ui small message">
-                                    <p>{ dataLabel_up: 25, dataLabel_down: -5 }</p>
-                                    <b class="returnValue">Number</b>
-                                </div>
-
-                                <h4 class="ui header">label</h4>
-                                <div>데이터라벨 show, hide</div>
-                                <div class="ui small message">
-                                    <p>{ label:true }</p>
-                                    <b class="returnValue">Boolean</b>
-                                </div>
-
-                                <h4 class="ui header">pointFillColor</h4>
-                                <div>포인터 내부 컬러</div>
-                                <div class="ui small message">
-                                    <p>{ pointFillColor:"#fff" }</p>
-                                    <b class="returnValue">String</b>
-                                </div>
-
-                                <h4 class="ui header">pointStrokeColor</h4>
-                                <div>포인터 보더 컬러</div>
-                                <div class="ui small message">
-                                    <p>{ pointStrokeColor:"dodgerblue" }</p>
-                                    <b class="returnValue">String</b>
-                                </div>
-
-                                <h4 class="ui header">pointRad</h4>
-                                <div>포인터 반지름</div>
-                                <div class="ui small message">
-                                    <p>{ pointRad:4 }</p>
-                                    <b class="returnValue">Number</b>
-                                </div>
-
-                                <h4 class="ui header">pointExpand</h4>
-                                <div>마우스 오버 이벤트에 포인터 확장 유무</div>
-                                <div class="ui small message">
-                                    <p>{ pointExpand:false }</p>
-                                    <b class="returnValue">Boolean</b>
-                                </div>
-
-                                <h4 class="ui header">pointExpandRate</h4>
-                                <div>포인터가 확장되는 비율. 마우스 오버시 기본값의 1.75배율로 확장</div>
-                                <div class="ui small message">
-                                    <p>{ pointExpandRate:1.75 }</p>
-                                    <b class="returnValue">Number</b>
-                                </div>
-
-                                <h4 class="ui header">colorPattern</h4>
-                                <div>복합적인 그래프의 경우 각각의 그래프 컬러 패턴을 배열로 저장.</div>
-                                <div class="ui small message">
-                                    <p>{ colorPattern:["dodgerblue"] }</p>
-                                    <b class="returnValue">String</b>
-                                </div>
-
-                                <h4 class="ui header">x_grid, y_grid</h4>
-                                <div>그래프 내부의 x,y좌표 그리드</div>
-                                <div class="ui small message">
-                                    <p>{ x_grid:true, y_grid:true }</p>
-                                    <b class="returnValue">Boolean</b>
-                                </div>
-
-                                <h4 class="ui header">dasharrayX, dasharrayY</h4>
-                                <div>그래프 내부 그리드 스타일. 도트로 출력되며, 도트의 길이와 간격으로 조절함.</div>
-                                <div class="ui small message">
-                                    <p>{ dasharrayX:"2 2", dasharrayY:"2 0" }</p>
-                                    <b class="returnValue">Number</b>
-                                </div>
-
-                                <h4 class="ui header">gridLineColor</h4>
-                                <div>그래프 내부 그리드라인의 컬러</div>
-                                <div class="ui small message">
-                                    <p class="">{ gridLineColor:"#eee" }</p>
-                                    <b class="returnValue">String</b>
-                                </div>
-
-                                <h4 class="ui header">legend</h4>
-                                <div>범례 show, hide</div>
-                                <div class="ui small message">
-                                    <p>{ legend:false }</p>
-                                    <b class="returnValue">Boolean</b>
-                                </div>
-
-                                <h4 class="ui header">regions_start, regions_end</h4>
-                                <div>그래프의 특정구간을 점선으로 구분함. 컬러변경(X), 라인스타일변경(X)</div>
-                                <div class="ui small message">
-                                    <p>{ regions_start:1, regions_end:3, regions_start_2:4, regions_end_2:5 }</p>
-                                    <b class="returnValue">Number</b>
-                                </div>
-
-                                <h4 class="ui header">focusLine</h4>
-                                <div>각 구간에 마우스 오버시 X축 데이터를 중심으로 세로 라인을 출력</div>
-                                <div class="ui small message">
-                                    <p>{ focusLine:false }</p>
-                                    <b class="returnValue">Boolean</b>
-                                </div>
-
-                                <h4 class="ui header">axis_x_tick_center</h4>
-                                <div>X축 데이터를 표시선(tick)의 중심에 출력</div>
-                                <div class="ui small message">
-                                    <p>{ axis_x_tick_center:true }</p>
-                                    <b class="returnValue">Boolean</b>
-                                </div>
-
-                                <h4 class="ui header">axis_x_outer, axis_y_outer</h4>
-                                <div>X, Y축의 양 끝의 라인을 제거</div>
-                                <div class="ui small message">
-                                    <p>{ axis_x_outer:true, axis_y_outer:true }</p>
-                                    <b class="returnValue">Boolean</b>
-                                </div>
-
-                                <h4 class="ui header">axis_y_count</h4>
-                                <div>Y축 데이터라벨의 개수</div>
-                                <div class="ui small message">
-                                    <p>{ axis_y_count:6 }</p>
-                                    <b class="returnValue">Number</b>
-                                </div>
-
-                                <h4 class="ui header">axis_y_max, axis_y_min</h4>
-                                <div>y축 최소값과 최대값.</div>
-                                <div class="ui small message">
-                                    <p>{ axis_y_max:8000, axis_y_min:0 }</p>
-                                    <b class="returnValue">Number</b>
-                                </div>
-
-                                <h4 class="ui header">tooltip_custom</h4>
-                                <div>툴팁 커스터마이징.</div>
-                                <div class="ui small message">
-                                    <p>{ tooltip_custom:"&lt;div class='tooltip-custom'&gt;최소 5,000 ~ 최대 10,000이상&lt;br&gt;전년비 &lt;span&gt;6%&lt;/span&gt;&lt;/div&gt;" }</p>
-                                </div>
-
-                                <h4 class="ui header">tooltip</h4>
-                                <div>툴팁</div>
-                                <div class="ui small message">
-                                    <p>{ tooltip: { show: true } }</p>
-                                    <b class="returnValue">Boolean</b>
-                                </div>
-
-                                <h4 class="ui header">dataLabelColor, dataLabelFontSize</h4>
-                                <div>데이터 라벨의 컬러와 폰트 사이즈 조정</div>
-                                <div class="ui small message">
-                                    <p>{ dataLabelColor:"deepblue", dataLabelFontSize:"12px" }</p>
-                                    <b class="returnValue">String, Number</b>
-                                </div>
-
-                                <h4 class="ui header">axis_x_color, axis_y_color</h4>
-                                <div>X, Y축 라인 컬러</div>
-                                <div class="ui small message">
-                                    <p>{ axis_x_color:"#ccc", axis_y_color:"#ddd" }</p>
-                                    <b class="returnValue">String</b>
-                                </div>
-
-                                <h4 class="ui header">axis_x_font_size, axis_x_font_color</h4>
-                                <div>X축 라벨의 컬러와 사이즈</div>
-                                <div class="ui small message">
-                                    <p>{ axis_x_font_size:"12px", axis_x_font_color:"#222" }</p>
-                                    <b class="returnValue">Number, String</b>
-                                </div>
-
-                                <h4 class="ui header">axis_y_font_size, axis_y_font_color</h4>
-                                <div>Y축 라벨의 컬러와 사이즈</div>
-                                <div class="ui small message">
-                                    <p>{ axis_y_font_size:"12px", axis_y_font_color:"#222" }</p>
-                                    <b class="returnValue">Number, String</b>
-                                </div>
-
-                                <h4 class="ui header">axis_x_positionY, axis_y_positionY</h4>
-                                <div>X, Y축 라벨의 Y포지션</div>
-                                <div class="ui small message">
-                                    <p>{ axis_x_positionY: 9, axis_y_positionY: 1 }</p>
-                                    <b class="returnValue">Number</b>
-                                </div>
-
-                                <h4 class="ui header">axis_x_tick_line, axis_y_tick_line</h4>
-                                <div>X, Y축 라벨의 tick 라인의 컬러. 따로 삭제할 수 없으니 배경컬러와 동일하게 조절하면 보이지 않음.</div>
-                                <div class="ui small message">
-                                    <p>{ axis_x_tick_line:"#000", axis_y_tick_line:"#ddd" }</p>
-                                    <b class="returnValue">String</b>
-                                </div>
-
-                                <h4 class="ui header">labelPosition</h4>
-                                <div>기준값을 중심으로 포인터의 상 하로 레이블 출력유무</div>
-                                <div class="ui small message">
-                                    <p>
-                                        <code>
-                                            <pre>
-if ( option.labelPosition ){
-    for ( i; i < $yAxisLabel.length; i++ ){
-        d3.selectAll('.c3-texts-' + $yAxisLabel[i] + ' .c3-text').each(function(d) {
-            if ( d === undefined ) return;
-            d.value > option.dataLabelDiv ? getDataLabelDiv( d, option.dataLabel_up, i ) : getDataLabelDiv( d, option.dataLabel_down, i );
-        });
-    }
-}</pre>
-                                        </code>
-                                    </p>
-                                    <b class="returnValue">Boolean</b>
-                                </div>
-
-                                <h4 class="ui header">format</h4>
-                                <div>C3에서 제공하는 포맷형태가 있지만, Label의 Boolean과 독립적인 옵션으로 제공되지 않기 때문에 새로 작성함.</div>
-                                <div class="ui small message">
-                                    <p>
-                                        <code>
-                                            <pre>
-function getDataLabelVal( d, i ){
-    if ( d.value === 0 ) {
-        $($thisTarget + ' .c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text('');
-    }else{
-        var t =$($thisTarget + ' .c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text();
-        $($thisTarget + ' .c3-texts-' + $yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text(t + option.format);
-    }
-}</pre>
-                                        </code>
-                                    </p>
-                                    <b class="returnValue">String</b>
-                                </div>
-
-                                <h4 class="ui header">zeroValue</h4>
-                                <div>데이터가 0일때 데이터레이블 출력 유무</div>
-                                <div class="ui small message">
-                                    <p>
-                                        <code>
-                                            <pre>
-if ( option.zeroValue ){
-    for ( i; i < $yAxisLabel.length; i++ ){
-        d3.selectAll($thisTarget + ' .c3-texts-' + $yAxisLabel[i] + ' .c3-text').each(function(d) {
-            getDataLabelVal(d, i);
-        });
-    }
-}</pre>
-                                        </code>
-                                    </p>
-                                    <b class="returnValue">Boolean</b>
-                                </div>
-
-                                <h4 class="ui header">rectView</h4>
-                                <div>그래프 배경의 컬러를 홀수, 또는 짝수에 따라 구분컬러를 넣어줄지 선택.</div>
-                                <div class="ui small message">
-                                    <p>
-                                        <code>
-                                            <pre>
-if ( option.rectView ){
-    $($thisTarget).find('.c3-event-rects-single rect').each(function(i){
-        var cls = $(this).attr('class').split(' ');
-        var clsNum = cls[cls.length-1];
-        $($thisTarget).find('.c3-event-rects-single rect:odd').attr('fill',option.rectOddColor);
-        $($thisTarget).find('.c3-event-rects-single rect:even').attr('fill',option.rectEvenColor);
-    });
-}else{
-    $($thisTarget).find('.c3-event-rects-single rect:odd').attr('fill', 'transparent');
-    $($thisTarget).find('.c3-event-rects-single rect:even').attr('fill', 'transparent');
-}</pre>
-                                        </code>
-                                    </p>
-                                    <b class="returnValue">Boolean</b>
-                                </div>
-
-                                <h4 class="ui header">rectOddColor</h4>
-                                <div>그래프 배경의 컬러를 홀수에 넣어줌.</div>
-                                <div class="ui small message">
-                                    <p>
-                                        <code>
-                                            <pre>$($thisTarget).find('.c3-event-rects-single rect:odd').attr('fill',option.rectOddColor);</pre>
-                                        </code>
-                                    </p>
-                                    <b class="returnValue">String</b>
-                                </div>
-
-                                <h4 class="ui header">rectEvenColor</h4>
-                                <div>그래프 배경의 컬러를 짝수에 넣어줌.</div>
-                                <div class="ui small message">
-                                    <p>
-                                        <code>
-                                            <pre>$($thisTarget).find('.c3-event-rects-single rect:even').attr('fill',option.rectEvenColor);</pre>
-                                        </code>
-                                    </p>
-                                    <b class="returnValue">String</b>
-                                </div>
-
-                                <h4 class="ui header">type</h4>
-                                <div>그래프 타입</div>
-                                <div class="ui small message">
-                                    <p>{ type: 'pie' }</p>
-                                    <b class="returnValue">String</b>
-                                </div>
+                        <div class="sixteen wide column" style="padding:20px;background:#f1f1f1">
+                            <div class="ui big yellow message">
+                                <p>var cc = new uit.chupachups('#id', {option});</p>
                             </div>
                         </div>
                     </div>
@@ -525,10 +196,73 @@ if ( option.rectView ){
         </div>
     </div>
 
-    <!-- <script type="text/javascript" src="./src/js/line.js"></script> -->
-    <script type="text/javascript" src="./src/js/customLine3.js"></script>
 
-    <!-- change -->
-   
+<link rel="stylesheet" media="screen" type="text/css" href="./src/colorpicker/css/colorpicker.css" />
+<script type="text/javascript" src="./src/colorpicker/js/colorpicker.js"></script>
+<script type="text/javascript" src="./src/js/chupachups.js"></script>
+
+
+<script>
+    /* chupachups init */
+
+    /* 디자인 옵션 */
+    var ccOptions = {
+        colorPattern: ['skyblue','#61c3af','#359aff','#f3bb34', '#fa6048'],
+        type:"pie"
+    };
+
+    /* 개발 옵션 */
+    ccOptions.data = ['data', '3,000미만', '3,000~4,000', '4,000~5,000', '5,000~7,000', '7,000 이상'];
+    ccOptions.yAxis = [['pieData-0', 600], ['pieData-1', 800], ['pieData-2', 300], ['pieData-3', 80], ['pieData-4', 60]];
+
+    var cc = new uit.chupachups('#cc', ccOptions);
+
+    /* demo init */
+    $('.codeView').text(JSON.stringify(cc.options));
+
+    $('.inputForm input').each(function() {
+        var val = cc.options[this.className];
+        if (this.getAttribute('data-check') !== 'exclusion') {
+            $(this).attr('value', val);
+        } else if (this.className == 'colorPattern') {
+            $(this).attr('value', val[$('.colorPattern').index(this)]);
+        } else if (this.className == 'data') {
+            $(this).attr('value', val[$('.data').index(this)]);
+        } else if (this.className.slice(0, -1) == 'yAxis_') {
+            val = cc.options.yAxis[this.className.replace('yAxis_','')][$('.'+this.className).index(this)] || '';
+            $(this).attr('value', val);
+        }
+    });
+
+    $('.inputForm input').on('change', function() {
+        if (this.getAttribute('data-check') !== 'exclusion') {
+            cc.options[this.className] = this.value;
+        } else if (this.className == 'colorPattern') {
+            cc.options[this.className][$('.colorPattern').index(this)] = this.value;
+        } else if (this.className == 'data') {
+            cc.options[this.className][$('.data').index(this)] = this.value;
+        } else if (this.className.slice(0, -1) == 'yAxis_') {
+            cc.options.yAxis[this.className.replace('yAxis_','')][$('.'+this.className).index(this)] = this.value;
+        }
+
+        cc = new uit.chupachups('#cc', cc.options);
+        $('.codeView').text(JSON.stringify(cc.options));
+    });
+
+    $('input[data-colorpick="true"]').ColorPicker({
+        onSubmit: function(hsb, hex, rgb, el) {
+            $(el).val('#'+hex);
+            $(el).ColorPickerHide();
+            $(el).trigger('change');
+        },
+        onBeforeShow: function () {
+            $(this).ColorPickerSetColor(this.value);
+        }
+    })
+    .bind('keyup', function(){
+        $(this).ColorPickerSetColor(this.value);
+    });
+
+</script>
 </body>
 </html>
