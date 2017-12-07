@@ -289,7 +289,7 @@
                     },
                     oninit: function() {
                         var radius = Math.min(c.options.svgWidth, c.options.svgHeight) / 2;
-                        var section = 'g.c3-chart-arc.c3-target.c3-target-donutData-';
+                        var section = 'g.c3-chart-arc.c3-target.c3-target-'+c.options.type+'Data-';
 
                         $container.css('background-color', c.options.svgBackgroundColor);
                         for ( var i = 0; i < c.options.colorPattern.length; i++ ){
