@@ -12,6 +12,10 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
     <title>C3 Chart</title>
+    <style>
+        .dataSetting input[data-check="exclusion"] {width: 46px;margin-left: 3px;}
+        .c3-line {stroke-width: 2;}
+    </style>
 </head>
 <body id="guide">
     <div class="pusher">
@@ -49,12 +53,140 @@
 
             <!-- content -->
             <div class="article">
-                <h1 class="ui header">DONUT Chart</h1>
-                <div class="sub header">jobkorea line chart style guide</div>
+                <div class="ui grid">
+                    <!-- SVG & DATA setting -->
+                    <div class="eight wide column inputForm dataSetting">
+                        <p>SVG & DATA setting</p>
+
+                        <!-- X Data & Y Data -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">X-data&nbsp;&nbsp;&nbsp;</div>
+                                <input class="data" data-check="exclusion" type="hidden">
+                                <input class="data" data-check="exclusion" type="text">
+                                <input class="data" data-check="exclusion" type="text">
+                                <input class="data" data-check="exclusion" type="text">
+                                <input class="data" data-check="exclusion" type="text">
+                                <input class="data" data-check="exclusion" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y-data 1</div>
+                                <input class="yAxis_0" data-check="exclusion" type="hidden">
+                                <input class="yAxis_0" data-check="exclusion" type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y-data 2</div>
+                                <input class="yAxis_1" data-check="exclusion" type="hidden">
+                                <input class="yAxis_1" data-check="exclusion" type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y-data 3</div>
+                                <input class="yAxis_2" data-check="exclusion" type="hidden">
+                                <input class="yAxis_2" data-check="exclusion" type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y-data 4</div>
+                                <input class="yAxis_3" data-check="exclusion" type="hidden">
+                                <input class="yAxis_3" data-check="exclusion" type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">Y-data 5</div>
+                                <input class="yAxis_4" data-check="exclusion" type="hidden">
+                                <input class="yAxis_4" data-check="exclusion" type="text">
+                            </div>
+                        </div>
+
+                        <!-- svg size -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">width</div>
+                                <input class="svgWidth" placeholder="SVG WIDTH" type="text">
+                            </div>
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">height</div>
+                                <input class="svgHeight" placeholder="SVG HEIGHT" type="text">
+                            </div>
+                        </div>
+                        <!-- svgBackgroundColor -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">svg 배경컬러</div>
+                                <input class="svgBackgroundColor" data-colorpick="true" placeholder="svgBackgroundColor" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Graph setting -->
+                    <div class="eight wide column inputForm">
+                        <p>Graph setting</p>
+                        <!-- Data label dataLabelColor & dataLabelFontSize -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">데이터 라벨 컬러, 사이즈</div>
+                                <input class="dataLabelColor" data-colorpick="true" placeholder="dataLabelColor" type="text">
+                                &nbsp;&nbsp;<input class="dataLabelFontSize" placeholder="dataLabelFontSize" type="text">
+                            </div>
+                        </div>
+
+                        <!-- colorPattern -->
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">colorPattern 1</div>
+                                <input class="colorPattern" data-colorpick="true" data-check="exclusion" placeholder="colorPattern" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">colorPattern 2</div>
+                                <input class="colorPattern" data-colorpick="true" data-check="exclusion" placeholder="colorPattern" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">colorPattern 3</div>
+                                <input class="colorPattern" data-colorpick="true" data-check="exclusion" placeholder="colorPattern" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">colorPattern 4</div>
+                                <input class="colorPattern" data-colorpick="true" data-check="exclusion" placeholder="colorPattern" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui mini labeled input">
+                                <div class="ui basic label">colorPattern 5</div>
+                                <input class="colorPattern" data-colorpick="true" data-check="exclusion" placeholder="colorPattern" type="text">
+                            </div>
+                        </div>
+                    </div>
                     <div class="sixteen wide column viewGraph">
                         <div class="chartBox">
-                            <div class="donutChart">
-                                
+                            <div id="cc"></div>
+                        </div>
+                    </div>
+                    <h2 class='section'>Option</h2>
+                    <div class="row">
+                        <div class="sixteen wide column codeView"></div>
+                    </div>
+                    <h2 class='section'>Usage</h2>
+                    <div class="row">
+                        <div class="sixteen wide column" style="padding:20px;background:#f1f1f1">
+                            <div class="ui big yellow message">
+                                <p>var cc = new uit.chupachups('#id', {option});</p>
                             </div>
                         </div>
                     </div>
@@ -63,12 +195,73 @@
         </div>
     </div>
 
-    <!-- <script type="text/javascript" src="./src/js/line.js"></script> -->
-    <script type="text/javascript" src="./src/js/donut.js"></script>
-    
-    <!-- change -->
-    <script>
-        $('.donutChart').donut();
-    </script>
+
+<link rel="stylesheet" media="screen" type="text/css" href="./src/colorpicker/css/colorpicker.css" />
+<script type="text/javascript" src="./src/colorpicker/js/colorpicker.js"></script>
+<script type="text/javascript" src="./src/js/chupachups.js"></script>
+
+
+<script>
+    /* chupachups init */
+
+    /* 디자인 옵션 */
+    var ccOptions = {
+        colorPattern: ['skyblue','#61c3af','#359aff','#f3bb34', '#fa6048'],
+        type:"donut"
+    };
+
+    /* 개발 옵션 */
+    ccOptions.data = ['data', '3,000미만', '3,000~4,000', '4,000~5,000', '5,000~7,000', '7,000 이상'];
+    ccOptions.yAxis = [['donutData-0', 600], ['donutData-1', 800], ['donutData-2', 300], ['donutData-3', 80], ['donutData-4', 60]];
+
+    var cc = new uit.chupachups('#cc', ccOptions);
+
+    /* demo init */
+    $('.codeView').text(JSON.stringify(cc.options));
+
+    $('.inputForm input').each(function() {
+        var val = cc.options[this.className];
+        if (this.getAttribute('data-check') !== 'exclusion') {
+            $(this).attr('value', val);
+        } else if (this.className == 'colorPattern') {
+            $(this).attr('value', val[$('.colorPattern').index(this)]);
+        } else if (this.className == 'data') {
+            $(this).attr('value', val[$('.data').index(this)]);
+        } else if (this.className.slice(0, -1) == 'yAxis_') {
+            val = cc.options.yAxis[this.className.replace('yAxis_','')][$('.'+this.className).index(this)] || '';
+            $(this).attr('value', val);
+        }
+    });
+
+    $('.inputForm input').on('change', function() {
+        if (this.getAttribute('data-check') !== 'exclusion') {
+            cc.options[this.className] = this.value;
+        } else if (this.className == 'colorPattern') {
+            cc.options[this.className][$('.colorPattern').index(this)] = this.value;
+        } else if (this.className == 'data') {
+            cc.options[this.className][$('.data').index(this)] = this.value;
+        } else if (this.className.slice(0, -1) == 'yAxis_') {
+            cc.options.yAxis[this.className.replace('yAxis_','')][$('.'+this.className).index(this)] = this.value;
+        }
+
+        cc = new uit.chupachups('#cc', cc.options);
+        $('.codeView').text(JSON.stringify(cc.options));
+    });
+
+    $('input[data-colorpick="true"]').ColorPicker({
+        onSubmit: function(hsb, hex, rgb, el) {
+            $(el).val('#'+hex);
+            $(el).ColorPickerHide();
+            $(el).trigger('change');
+        },
+        onBeforeShow: function () {
+            $(this).ColorPickerSetColor(this.value);
+        }
+    })
+    .bind('keyup', function(){
+        $(this).ColorPickerSetColor(this.value);
+    });
+
+</script>
 </body>
 </html>
