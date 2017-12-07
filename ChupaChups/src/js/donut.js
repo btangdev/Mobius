@@ -48,7 +48,6 @@
                         d3.select('svg').select(section+i)
                             .append('text')
                             .attr('class','pieLabel')  
-                            .style("fill", "white")
                             .style('font-size','14')
                             .attr("x", function(d) {
                                 var angle = d.startAngle + (d.endAngle - d.startAngle)/2 - Math.PI/2;

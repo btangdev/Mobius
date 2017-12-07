@@ -18,55 +18,14 @@
         svgWidth: 800,
         svgHeight: 360,
         svgBackgroundColor: '#ffffff',
-        dataLabelDiv: 4000,
-        dataLabel_up: 25,
-        dataLabel_down: -5,
         label: true,
-        pointFillColor: '#ffffff',
-        pointStrokeColor: 'dodgerblue',
-        pointRad: 10,
-        pointExpand: false,
-        pointExpandRate: 1.75,
         colorPattern: [],
-        x_grid: false,
-        y_grid: false,
         legend: false,
-        regions_start: 0,
-        regions_end: 0,
-        regions_start_2: 0,
-        regions_end_2: 0,
-        regions_style: 'dashed',
-        focusLine: false,
-        axis_x_tick_center: true,
-        axis_x_outer: true,
-        axis_y_outer: true,
-        axis_y_count: 4,
-        axis_y_max: 0,
-        axis_y_min: 0,
-        tooltip_custom: "",
         tooltip: true,
         dataLabelColor: "",
         dataLabelFontSize: '',
-        axis_y_color: '',
-        axis_x_color: '',
-        dasharrayX: '',
-        dasharrayY: '',
-        gridLineColor: '',
-        axis_y_font_size: '',
-        axis_y_font_color: '',
-        axis_x_font_size: '',
-        axis_x_font_color: '',
-        axis_x_positionY: 9,
-        axis_y_positionY: 2,
-        axis_x_tick_line: '',
-        axis_y_tick_line: '',
         labelPosition: false,
-        format: '%',
-        zeroValue: true,
-        rectView: false,
-        rectOddColor:'#dddddd',
-        rectEvenColor:'transparent',
-        type: 'line'
+        format: '%'
     };
 
     var chupachups = uit.chupachups = function(container, options) {
@@ -83,21 +42,75 @@
             $container = $(container), // =$target 
             // container = $thisTarget
             $dataLabel = options.data[0],
-            yAxisLabel = [];
+            yAxisLabel = [],
+            chartOptions;
+        var lineOptions = {
+            dataLabelDiv: 4000,
+            dataLabel_up: 25,
+            dataLabel_down: -5,
+            pointFillColor: '#ffffff',
+            pointStrokeColor: 'dodgerblue',
+            pointRad: 10,
+            pointExpand: false,
+            pointExpandRate: 1.75,
+            x_grid: false,
+            y_grid: false,
+            regions_start: 0,
+            regions_end: 0,
+            regions_start_2: 0,
+            regions_end_2: 0,
+            regions_style: 'dashed',
+            focusLine: false,
+            axis_x_tick_center: true,
+            axis_x_outer: true,
+            axis_y_outer: true,
+            axis_y_count: 4,
+            axis_y_max: 0,
+            axis_y_min: 0,
+            tooltip_custom: "",
+            axis_y_color: '',
+            axis_x_color: '',
+            dasharrayX: '',
+            dasharrayY: '',
+            gridLineColor: '',
+            axis_y_font_size: '',
+            axis_y_font_color: '',
+            axis_x_font_size: '',
+            axis_x_font_color: '',
+            axis_x_positionY: 9,
+            axis_y_positionY: 2,
+            axis_x_tick_line: '',
+            axis_y_tick_line: '',
+            zeroValue: true,
+            rectView: false,
+            rectOddColor:'#dddddd',
+            rectEvenColor:'transparent',
+        };
+        var donutOptions = {
+            svgWidth: 960,
+            svgHeight: 400,
+            svgBackgroundColor: '#f8f8f8',
+            label: false,
+            dataLabelColor: "#000",
+            dataLabelFontSize: '14',
+        };
 
-        c.options = $.extend(defaultOptions, options);
+        switch (options.type) {
+            case "line":
+                defaultOptions = $.extend({}, defaultOptions, lineOptions);
+                break;
+            case "donut":
+                defaultOptions = $.extend({}, defaultOptions, donutOptions);
+                break;
+            default:
+                console.error('type none!');
+        }
+
+        c.options = $.extend({}, defaultOptions, options);
 
         for ( var i = 0; i < c.options.yAxis.length; i++ ){
             yAxisLabel.push(c.options.yAxis[i][0]);
         }
-
-        $container.css({
-            'background-color':c.options.svgBackgroundColor,
-            // 'padding':'20px',
-            'position':'relative',
-            'width':c.options.svgWidth,
-            'margin':'0 auto'
-        });
 
         var yDataArr=[];
         yDataArr[0]=c.options.data;
@@ -105,151 +118,236 @@
             yDataArr[j+1] =c.options.yAxis[j];
         }
 
-        var chart = c3.generate({
-            bindto: container,
-            size: {
-                width: c.options.svgWidth,
-                height: c.options.svgHeight
-            },
-            onrendered: function() {
-                var i = 0;
-                $container.find('svg').css('background-color', c.options.svgBackgroundColor);
-                if ( c.options.labelPosition ){
-                    for ( i; i < yAxisLabel.length; i++ ){
-                        d3.selectAll('.c3-texts-' + yAxisLabel[i] + ' .c3-text').each(function(d) {
-                            if ( d === undefined ) return;
-                            d.value > c.options.dataLabelDiv ? getDataLabelDiv( d, c.options.dataLabel_up, i ) : getDataLabelDiv( d, c.options.dataLabel_down, i );
-                        });
-                    }
-                }
-
-                if ( c.options.zeroValue ){
-                    for ( i; i < yAxisLabel.length; i++ ){
-                        d3.selectAll(container + ' .c3-texts-' + yAxisLabel[i] + ' .c3-text').each(function(d) {
-                            getDataLabelVal(d, i);
-                        });
-                    }
-                }
-
-                var rectLength = $(container).find('.c3-event-rects-single rect').css('fill-opacity', 0.4);
-
-                if ( c.options.rectView ){
-                    $(container).find('.c3-event-rects-single rect').each(function(i){
-                        var cls = $(this).attr('class').split(' ');
-                        var clsNum = cls[cls.length-1];
-                        $(container).find('.c3-event-rects-single rect:odd').attr('fill', c.options.rectOddColor);
-                        $(container).find('.c3-event-rects-single rect:even').attr('fill', c.options.rectEvenColor);
-                    });
-                }else{
-                    $(container).find('.c3-event-rects-single rect:odd').attr('fill', 'transparent');
-                    $(container).find('.c3-event-rects-single rect:even').attr('fill', 'transparent');
-                }
-
-                function getDataLabelDiv( d, val, i ){
-                    $('.c3-texts-' + yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).css('transform','translate(0, '+ val +'px)');
-                }
-
-                function getDataLabelVal( d, i ){
-                    if ( d.value === 0 ) {
-                        $(container + ' .c3-texts-' + yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text('');
-                    }else{
-                        var t =$(container + ' .c3-texts-' + yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text();
-                        $(container + ' .c3-texts-' + yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text(t + c.options.format);
-                    }
-                }
-
-                for ( i = 0; i < c.options.pointStrokeColor.length; i++ ){
-                    d3.selectAll( $(container + ' .c3-target-' + yAxisLabel[i] + ' circle')).each(function(d){
-                        $(container + ' .c3-target-' + yAxisLabel[i] + ' circle.c3-circle-'+d.index).css('stroke', c.options.pointStrokeColor[i]);
-                    });
-                }
-
-                this.getCircles().style({'fill': c.options.pointFillColor});
-
-                $(container + ' .c3-texts .c3-text').css({'fill': c.options.dataLabelColor, 'font-size': c.options.dataLabelFontSize });
-                $(container + ' .c3-axis-x path').css('stroke', c.options.axis_x_color);
-                $(container + ' .c3-axis-x line').css('stroke', c.options.axis_x_color);
-                $(container + ' .c3-axis-y path').css('stroke', c.options.axis_y_color);
-                $(container + ' .c3-axis-y line').css('stroke', c.options.axis_y_color);
-                $(container + ' .c3-axis-x .tick text').attr('y', c.options.axis_x_positionY);
-                $(container + ' .c3-axis-y .tick text').attr('y', c.options.axis_y_positionY);
-                $(container + ' .c3-axis-y .tick line').css('stroke', c.options.axis_y_tick_line);
-                $(container + ' .c3-axis-x .tick line').css('stroke', c.options.axis_x_tick_line);
-                $(container + ' .c3-line').css('stroke-dasharray', '0');
-                $(container + ' .c3-ygrid').css('stroke-dasharray', c.options.dasharrayY);
-                $(container + ' .c3-xgrid').css('stroke-dasharray', c.options.dasharrayX);
-                $(container + ' .c3-grid line').css('stroke', c.options.gridLineColor);
-                $(container + ' .c3-axis-y text').css({'font-size': c.options.axis_y_font_size, 'fill': c.options.axis_y_font_color});
-                $(container + ' .c3-axis-x text').css({'font-size': c.options.axis_x_font_size, 'fill': c.options.axis_x_font_color});
-            },
-            data: {
-                x : $dataLabel,
-                columns: yDataArr,
-                type: c.options.type,
-                regions: {
-                    [yAxisLabel]: [{
-                        'start' : c.options.regions_start,
-                        'end': c.options.regions_end,
-                        'style': c.options.regions_style
-                    }, {
-                        'start': c.options.regions_start_2,
-                        'end': c.options.regions_end_2
-                    }]
-                },
-                labels: c.options.label
-            },
-            axis: {
-                x: {
-                    type: 'category',
-                    tick: {
-                      centered: c.options.axis_x_tick_center,
-                      outer: c.options.axis_x_outer
-                    }
-                },
-                y: {
-                    max: c.options.axis_y_max,
-                    min: c.options.axis_y_min,
-                    tick: {
-                        count: c.options.axis_y_count,
-                        outer: c.options.axis_y_outer,
-                        format: function (d) { return Math.round(d); }
+        switch (c.options.type) {
+            case "line":
+                $container.css({
+                    'background-color':c.options.svgBackgroundColor,
+                    // 'padding':'20px',
+                    'position':'relative',
+                    'width':c.options.svgWidth,
+                    'margin':'0 auto'
+                });
+                chartOptions = {
+                    bindto: container,
+                    size: {
+                        width: c.options.svgWidth,
+                        height: c.options.svgHeight
                     },
-                    padding: {top:0, bottom:0}
-                }
-            },
-            tooltip: {
-                contents: function (d, defaultTitleFormat, defaultValueFormat, color) {
-                    return c.options.tooltip_custom;
-                },
-                show: c.options.tooltip
-            },
-            grid: {
-                y: {
-                    show: c.options.y_grid
-                },
-                x: {
-                    show: c.options.x_grid
-                },
-                focus: {
-                    show: c.options.focusLine
-                }
-            },
-            point: {
-                r: c.options.pointRad,
-                focus: {
-                    expand: {
-                        enabled: c.options.pointExpand,
-                        r: c.options.pointRad * c.options.pointExpandRate
+                    onrendered: function() {
+                        var i = 0;
+                        $container.find('svg').css('background-color', c.options.svgBackgroundColor);
+                        if ( c.options.labelPosition ){
+                            for ( i; i < yAxisLabel.length; i++ ){
+                                d3.selectAll('.c3-texts-' + yAxisLabel[i] + ' .c3-text').each(function(d) {
+                                    if ( d === undefined ) return;
+                                    d.value > c.options.dataLabelDiv ? getDataLabelDiv( d, c.options.dataLabel_up, i ) : getDataLabelDiv( d, c.options.dataLabel_down, i );
+                                });
+                            }
+                        }
+
+                        if ( c.options.zeroValue ){
+                            for ( i; i < yAxisLabel.length; i++ ){
+                                d3.selectAll(container + ' .c3-texts-' + yAxisLabel[i] + ' .c3-text').each(function(d) {
+                                    getDataLabelVal(d, i);
+                                });
+                            }
+                        }
+
+                        var rectLength = $(container).find('.c3-event-rects-single rect').css('fill-opacity', 0.4);
+
+                        if ( c.options.rectView ){
+                            $(container).find('.c3-event-rects-single rect').each(function(i){
+                                var cls = $(this).attr('class').split(' ');
+                                var clsNum = cls[cls.length-1];
+                                $(container).find('.c3-event-rects-single rect:odd').attr('fill', c.options.rectOddColor);
+                                $(container).find('.c3-event-rects-single rect:even').attr('fill', c.options.rectEvenColor);
+                            });
+                        }else{
+                            $(container).find('.c3-event-rects-single rect:odd').attr('fill', 'transparent');
+                            $(container).find('.c3-event-rects-single rect:even').attr('fill', 'transparent');
+                        }
+
+                        function getDataLabelDiv( d, val, i ){
+                            $('.c3-texts-' + yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).css('transform','translate(0, '+ val +'px)');
+                        }
+
+                        function getDataLabelVal( d, i ){
+                            if ( d.value === 0 ) {
+                                $(container + ' .c3-texts-' + yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text('');
+                            }else{
+                                var t =$(container + ' .c3-texts-' + yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text();
+                                $(container + ' .c3-texts-' + yAxisLabel[i] + '.c3-texts .c3-text-' + d.index).text(t + c.options.format);
+                            }
+                        }
+
+                        for ( i = 0; i < c.options.pointStrokeColor.length; i++ ){
+                            d3.selectAll( $(container + ' .c3-target-' + yAxisLabel[i] + ' circle')).each(function(d){
+                                $(container + ' .c3-target-' + yAxisLabel[i] + ' circle.c3-circle-'+d.index).css('stroke', c.options.pointStrokeColor[i]);
+                            });
+                        }
+
+                        this.getCircles().style({'fill': c.options.pointFillColor});
+
+                        $(container + ' .c3-texts .c3-text').css({'fill': c.options.dataLabelColor, 'font-size': c.options.dataLabelFontSize });
+                        $(container + ' .c3-axis-x path').css('stroke', c.options.axis_x_color);
+                        $(container + ' .c3-axis-x line').css('stroke', c.options.axis_x_color);
+                        $(container + ' .c3-axis-y path').css('stroke', c.options.axis_y_color);
+                        $(container + ' .c3-axis-y line').css('stroke', c.options.axis_y_color);
+                        $(container + ' .c3-axis-x .tick text').attr('y', c.options.axis_x_positionY);
+                        $(container + ' .c3-axis-y .tick text').attr('y', c.options.axis_y_positionY);
+                        $(container + ' .c3-axis-y .tick line').css('stroke', c.options.axis_y_tick_line);
+                        $(container + ' .c3-axis-x .tick line').css('stroke', c.options.axis_x_tick_line);
+                        $(container + ' .c3-line').css('stroke-dasharray', '0');
+                        $(container + ' .c3-ygrid').css('stroke-dasharray', c.options.dasharrayY);
+                        $(container + ' .c3-xgrid').css('stroke-dasharray', c.options.dasharrayX);
+                        $(container + ' .c3-grid line').css('stroke', c.options.gridLineColor);
+                        $(container + ' .c3-axis-y text').css({'font-size': c.options.axis_y_font_size, 'fill': c.options.axis_y_font_color});
+                        $(container + ' .c3-axis-x text').css({'font-size': c.options.axis_x_font_size, 'fill': c.options.axis_x_font_color});
+                    },
+                    data: {
+                        x : $dataLabel,
+                        columns: yDataArr,
+                        type: c.options.type,
+                        regions: {
+                            [yAxisLabel]: [{
+                                'start' : c.options.regions_start,
+                                'end': c.options.regions_end,
+                                'style': c.options.regions_style
+                            }, {
+                                'start': c.options.regions_start_2,
+                                'end': c.options.regions_end_2
+                            }]
+                        },
+                        labels: c.options.label
+                    },
+                    axis: {
+                        x: {
+                            type: 'category',
+                            tick: {
+                              centered: c.options.axis_x_tick_center,
+                              outer: c.options.axis_x_outer
+                            }
+                        },
+                        y: {
+                            max: c.options.axis_y_max,
+                            min: c.options.axis_y_min,
+                            tick: {
+                                count: c.options.axis_y_count,
+                                outer: c.options.axis_y_outer,
+                                format: function (d) { return Math.round(d); }
+                            },
+                            padding: {top:0, bottom:0}
+                        }
+                    },
+                    tooltip: {
+                        contents: function (d, defaultTitleFormat, defaultValueFormat, color) {
+                            return c.options.tooltip_custom;
+                        },
+                        show: c.options.tooltip
+                    },
+                    grid: {
+                        y: {
+                            show: c.options.y_grid
+                        },
+                        x: {
+                            show: c.options.x_grid
+                        },
+                        focus: {
+                            show: c.options.focusLine
+                        }
+                    },
+                    point: {
+                        r: c.options.pointRad,
+                        focus: {
+                            expand: {
+                                enabled: c.options.pointExpand,
+                                r: c.options.pointRad * c.options.pointExpandRate
+                            }
+                        }
+                    },
+                    color: {
+                        pattern: c.options.colorPattern
+                    },
+                    legend: {
+                      show: c.options.legend
                     }
-                }
-            },
-            color: {
-                pattern: c.options.colorPattern
-            },
-            legend: {
-              show: c.options.legend
-            }
-        });
+                };
+                break;
+            case "donut":
+                chartOptions = {
+                    interaction: {
+                        enabled: false
+                    },
+                    bindto: container,
+                    size: {
+                        width: c.options.svgWidth,
+                        height: c.options.svgHeight
+                    },
+                    oninit: function() {
+                        var radius = Math.min(c.options.svgWidth, c.options.svgHeight) / 2;
+                        var section = 'g.c3-chart-arc.c3-target.c3-target-donutData-';
+
+                        $container.css('background-color', c.options.svgBackgroundColor);
+                        for ( var i = 0; i < c.options.colorPattern.length; i++ ){
+                            d3.select('svg').select(section+i)
+                                .append('text')
+                                .attr('class','pieLabel')
+                                .style({'font-size': c.options.dataLabelFontSize, 'fill': c.options.dataLabelColor})
+                                .attr("x", function(d) {
+                                    var angle = d.startAngle + (d.endAngle - d.startAngle)/2 - Math.PI/2;
+                                    d.cx = Math.cos(angle) * (radius - 25);
+                                    return d.x = Math.cos(angle) * (radius + 40) -30;
+                                })
+                                .attr("y", function(d) {
+                                    var angle = d.startAngle + (d.endAngle - d.startAngle)/2 - Math.PI/2;
+                                    d.cy = Math.sin(angle) * (radius - 50);
+                                    return d.y = Math.sin(angle) * (radius) + 5;
+                                })
+                                .text(c.options.data[i+1])
+                                .each(function(d) {
+                                    var bbox = this.getBBox();
+                                    d.sx = d.x - bbox.width/2 + 30;
+                                    d.ox = d.x + bbox.width/2 - 5 ;
+                                    d.sy = d.oy = d.y - 5;
+                                });
+                            d3.select('svg').select(section+i)
+                                .append("path")
+                                .attr("class", "labelPointer")
+                                .style("fill", "none")
+                                .style("stroke", "gray");
+                        }
+                    },
+                    onrendered: function() {
+                        var pie = d3.select('g.c3-chart-arcs')
+                        var translate = d3.select('g.c3-chart-arcs').attr('transform');
+
+                        pie.attr('transform',translate + ' scale(0.85)');
+                    },
+                    data: {
+                        columns: yDataArr,
+                        type: c.options.type,
+                        labels: c.options.label,
+                        order: null
+                    },
+                    tooltip: {
+                        contents: function (d, defaultTitleFormat, defaultValueFormat, color) {
+                            return "<div class='tooltip-custom'><span>"+d[0].value+"명</span></div>"
+                        },
+                        show: c.options.tooltip
+                    },
+                    color: {
+                        pattern: c.options.colorPattern
+                    },
+                    legend: {
+                        show: c.options.legend
+                    }
+                };
+                break;
+            default:
+                console.error('type none!');
+        }
+
+        var chart = c3.generate(chartOptions);
     };
 
     return uit;
