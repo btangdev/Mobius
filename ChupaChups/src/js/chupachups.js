@@ -97,6 +97,7 @@
 
         switch (options.type) {
             case "line":
+            case "bar":
                 defaultOptions = $.extend({}, defaultOptions, lineOptions);
                 break;
             case "donut":
@@ -120,6 +121,7 @@
 
         switch (c.options.type) {
             case "line":
+            case "bar":
                 $container.css({
                     'background-color':c.options.svgBackgroundColor,
                     // 'padding':'20px',
