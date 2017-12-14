@@ -277,7 +277,9 @@
                 };
                 break;
             case "donut":
+                
             case "pie":
+
                 chartOptions = {
                     interaction: {
                         enabled: true
@@ -288,33 +290,84 @@
                         height: c.options.svgHeight
                     },
                     oninit: function() {
+
+                        function midAngle(d) {
+                            return d.startAngle + (d.endAngle - d.startAngle) / 2;
+                        }
+
+                        var svg = d3.select('svg');
+                        var data = [];
+
+                        var labels = c.options.data;
+                        labels.splice(0, 1);
+
                         var radius = Math.min(c.options.svgWidth, c.options.svgHeight) / 2;
                         var section = 'g.c3-chart-arc.c3-target.c3-target-'+c.options.type+'Data-';
 
+                        var pie = d3.layout.pie().sort(null);
+                        var arc = d3.svg.arc()
+                            .outerRadius(radius * .9)
+                            .innerRadius(radius * 0.6);
+                        var outerArc = d3.svg.arc()
+                            .innerRadius(radius * 0.9)
+                            .outerRadius(radius * 0.95);
+
                         $container.css('background-color', c.options.svgBackgroundColor);
                         for ( var i = 0; i < c.options.colorPattern.length; i++ ){
-                            d3.select('svg').select(section+i)
-                                .append('text')
-                                .attr('class','pieLabel')
-                                .style({'font-size': c.options.dataLabelFontSize, 'fill': c.options.dataLabelColor})
-                                .attr("x", function(d) {
-                                    var angle = d.startAngle + (d.endAngle - d.startAngle)/2 - Math.PI/2;
-                                    d.cx = Math.cos(angle) * (radius - 25);
-                                    return d.x = Math.cos(angle) * (radius + 40) -30;
-                                })
-                                .attr("y", function(d) {
-                                    var angle = d.startAngle + (d.endAngle - d.startAngle)/2 - Math.PI/2;
-                                    d.cy = Math.sin(angle) * (radius - 50);
-                                    return d.y = Math.sin(angle) * (radius) + 5;
-                                })
-                                .text(c.options.data[i+1])
-                                .each(function(d) {
-                                    var bbox = this.getBBox();
-                                    d.sx = d.x - bbox.width/2 + 30;
-                                    d.ox = d.x + bbox.width/2 - 5 ;
-                                    d.sy = d.oy = d.y - 5;
-                                });
+                            data.push(c.options.yAxis[i][1]);
                         }
+
+                        // label
+                        svg.select('.c3-chart-arcs').append("g").attr("class", "labels");
+                        var text = svg.select(".labels").selectAll("text").data(pie(data));
+                        text.enter().append("g");
+                        text.append("text")
+                            .attr("dy", ".35em")
+                            .style({ 'font-size': c.options.dataLabelFontSize, 'fill': c.options.dataLabelColor })
+                            .text(function(d,i) {
+                                return labels[i];
+                            })
+                        text.transition().duration(1000)
+                            .attrTween("transform", function (d) {
+                                this._current = this._current || d;
+                                var interpolate = d3.interpolate(this._current, d);
+                                this._current = interpolate(0);
+                                return function (t) {
+                                    var d2 = interpolate(t);
+                                    var pos = outerArc.centroid(d2);
+                                    pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+                                    return "translate(" + pos + ")";
+                                };
+                            })
+                            .styleTween("text-anchor", function (d) {
+                                this._current = this._current || d;
+                                var interpolate = d3.interpolate(this._current, d);
+                                this._current = interpolate(0);
+                                return function (t) {
+                                    var d2 = interpolate(t);
+                                    return midAngle(d2) < Math.PI ? "start" : "end";
+                                };
+                            });
+                        
+                        // line
+                        svg.select('.c3-chart-arcs').append("g").attr("class", "lines");
+                        var polyline = svg.select(".lines").selectAll("polyline").data(pie(data));
+                        polyline.enter().append("polyline");
+                        polyline.transition().duration(1000)
+                            .attrTween("points", function (d) {
+                                this._current = this._current || d;
+                                var interpolate = d3.interpolate(this._current, d);
+                                this._current = interpolate(0);
+                                return function (t) {
+                                    var d2 = interpolate(t);
+                                    var pos = outerArc.centroid(d2);
+                                    pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
+                                    return [arc.centroid(d2), outerArc.centroid(d2), pos];
+                                };
+                            });
+                        polyline.exit()
+                            .remove();
+
                     },
                     onrendered: function() {
                         var pie = d3.select('g.c3-chart-arcs')
