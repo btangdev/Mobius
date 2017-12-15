@@ -120,6 +120,8 @@
             yDataArr[j+1] =c.options.yAxis[j];
         }
 
+        var dataPercentage = [];
+
         switch (c.options.type) {
             case "line":
             case "bar":
@@ -291,29 +293,37 @@
                     },
                     oninit: function() {
 
+                    },
+                    onrendered: function() {
+                        var pie = d3.select('g.c3-chart-arcs')
+                        var translate = d3.select('g.c3-chart-arcs').attr('transform');
+                        pie.attr('transform',translate + ' scale(0.85)');
+                        
+
                         function midAngle(d) {
                             return d.startAngle + (d.endAngle - d.startAngle) / 2;
                         }
-
                         var svg = d3.select('svg');
                         var data = [];
 
                         var labels = c.options.data;
+
                         labels.splice(0, 1);
 
                         var radius = Math.min(c.options.svgWidth, c.options.svgHeight) / 2;
-                        var section = 'g.c3-chart-arc.c3-target.c3-target-'+c.options.type+'Data-';
+
+                        var section = 'g.c3-chart-arc.c3-target.c3-target-' + c.options.type + 'Data-';
 
                         var pie = d3.layout.pie().sort(null);
                         var arc = d3.svg.arc()
-                            .outerRadius(radius * .9)
-                            .innerRadius(radius * 0.6);
+                            .outerRadius(radius * 0.9)
+                            .innerRadius(radius * 0.7);
                         var outerArc = d3.svg.arc()
                             .innerRadius(radius * 0.9)
-                            .outerRadius(radius * 0.95);
+                            .outerRadius(radius * 1);
 
                         $container.css('background-color', c.options.svgBackgroundColor);
-                        for ( var i = 0; i < c.options.colorPattern.length; i++ ){
+                        for (var i = 0; i < c.options.colorPattern.length; i++) {
                             data.push(c.options.yAxis[i][1]);
                         }
 
@@ -324,7 +334,7 @@
                         text.append("text")
                             .attr("dy", ".35em")
                             .style({ 'font-size': c.options.dataLabelFontSize, 'fill': c.options.dataLabelColor })
-                            .text(function(d,i) {
+                            .text(function (d, i) {
                                 return labels[i];
                             })
                         text.transition().duration(1000)
@@ -348,13 +358,13 @@
                                     return midAngle(d2) < Math.PI ? "start" : "end";
                                 };
                             });
-                        
+
                         // line
                         svg.select('.c3-chart-arcs').append("g").attr("class", "lines");
                         var polyline = svg.select(".lines").selectAll("polyline").data(pie(data));
                         polyline.enter().append("polyline");
                         polyline.transition().duration(1000)
-                            .attrTween("points", function (d) {
+                            .attrTween("points", function (d, i) {
                                 this._current = this._current || d;
                                 var interpolate = d3.interpolate(this._current, d);
                                 this._current = interpolate(0);
@@ -367,13 +377,6 @@
                             });
                         polyline.exit()
                             .remove();
-
-                    },
-                    onrendered: function() {
-                        var pie = d3.select('g.c3-chart-arcs')
-                        var translate = d3.select('g.c3-chart-arcs').attr('transform');
-
-                        pie.attr('transform',translate + ' scale(0.85)');
                     },
                     data: {
                         columns: yDataArr,
@@ -392,6 +395,16 @@
                     },
                     legend: {
                         show: c.options.legend
+                    },
+                    donut: {
+                        label: {
+                            threshold: 0.03,
+                            format: function (value, ratio) {
+                                ratio = d3.format('%')(ratio);
+                                dataPercentage.push(ratio.replace(/%/g, ''));
+                                return ratio;
+                            }
+                        }
                     }
                 };
                 break;
