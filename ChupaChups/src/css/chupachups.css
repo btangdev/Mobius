@@ -84,4 +84,6 @@ input.dasharrayY { width: 58px; }
 
 .c3 .c3-tooltip-container {padding:10px; box-shadow:0px 5px 15px 0px rgba(0,0,0,0.3); background:#fff;}
 
+.c3-chart-arcs polyline {opacity:.3; stroke:#000; stroke-width:1px; fill:none;}
+
 /*.pieLabel { fill: #000!important; }*/
