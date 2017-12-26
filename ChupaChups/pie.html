@@ -205,7 +205,7 @@
 
     /* 디자인 옵션 */
     var ccOptions = {
-        colorPattern: ['skyblue','#61c3af','#359aff','#f3bb34', '#fa6048'],
+        colorPattern: ['#0eceeb','#61c3af','#359aff','#f3bb34', '#fa6048'],
         type:"pie"
     };
 
@@ -234,7 +234,11 @@
 
     $('.inputForm input').on('change', function() {
         if (this.getAttribute('data-check') !== 'exclusion') {
-            cc.options[this.className] = this.value;
+          if (this.type !== 'checkbox') {
+              cc.options[this.className] = this.value;
+          } else {
+              cc.options[this.className] = this.checked;
+          }
         } else if (this.className == 'colorPattern') {
             cc.options[this.className][$('.colorPattern').index(this)] = this.value;
         } else if (this.className == 'data') {

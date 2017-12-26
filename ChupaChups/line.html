@@ -224,11 +224,11 @@
                             </div>
                             <!-- X Axis Grid -->
                             <div class="ui checkbox">
-                                <input class="" id="x_grid" type="checkbox" name="x_grid"><label for="x_grid">X Axis grid</label>
+                                <input class="x_grid" id="x_grid" type="checkbox" name="x_grid"><label for="x_grid">X Axis grid</label>
                             </div>
                             <!-- Y Axis Grid -->
                             <div class="ui checked checkbox">
-                                <input class="" id="y_grid" checked="" type="checkbox" name="y_grid"><label for="y_grid">Y Axis grid</label>
+                                <input class="y_grid" id="y_grid" checked="" type="checkbox" name="y_grid"><label for="y_grid">Y Axis grid</label>
                             </div>
                             <!-- x axis outer -->
                             <div class="ui checkbox">
@@ -315,7 +315,7 @@
                         <!-- tooltip -->
                         <div class="row">
                             <div class="ui checkbox">
-                                <input class="" id="pointExpand" type="checkbox" name="pointExpand"><label for="pointExpand">pointer expand</label>
+                                <input class="pointExpand" id="pointExpand" type="checkbox" name="pointExpand"><label for="pointExpand">pointer expand</label>
                             </div>
 
                             <!-- <div class="ui mini labeled input">
@@ -323,7 +323,7 @@
                                 <input type="text" disabled placeholder="tooltip_custom" class="tooltip_custom">
                             </div> -->
                             <div class="ui checkbox">
-                                <input class="" id="tooltip" type="checkbox" name="tooltip"><label for="tooltip">tooltip</label>
+                                <input class="tooltip" id="tooltip" type="checkbox" name="tooltip"><label for="tooltip">tooltip</label>
                             </div>
                         </div>
                     </div>
@@ -355,7 +355,7 @@
                         <div class="row">
                             <div class="ui mini labeled input">
                                 <div class="ui basic label">rectEvenColor</div>
-                                <input type="text" placeholder="rectEvenColor" class="rectEvenColor">
+                                <input type="text"  data-colorpick="true" placeholder="rectEvenColor" class="rectEvenColor">
                             </div>
                         </div>
                         <!-- dasharrayX, dasharrayY -->
@@ -373,7 +373,7 @@
                         <div class="row">
                             <!-- rectView -->
                             <div class="ui checked checkbox">
-                                <input class="" id="rectView" checked="" type="checkbox" name="rectView"><label for="rectView">rectView</label>
+                                <input class="rectView" id="rectView" checked="" type="checkbox" name="rectView"><label for="rectView">rectView</label>
                             </div>
                         </div>
                         <div class="row">
@@ -390,13 +390,13 @@
                         <div class="row">
                             <!-- labelPosition -->
                             <div class="ui checkbox">
-                                <input class="" id="labelPosition" type="checkbox" name="labelPosition"><label for="labelPosition">labelPosition</label>
+                                <input class="labelPosition" id="labelPosition" type="checkbox" name="labelPosition"><label for="labelPosition">labelPosition</label>
                             </div>
                         </div>
                         <div class="row">
                             <!-- zeroValue -->
                             <div class="ui checked checkbox">
-                                <input class="" id="zeroValue" checked="" type="checkbox" name="zeroValue"><label for="zeroValue">zeroValue</label>
+                                <input class="zeroValue" id="zeroValue" checked="" type="checkbox" name="zeroValue"><label for="zeroValue">zeroValue</label>
                             </div>
                         </div>
                     </div>
@@ -797,7 +797,11 @@ if ( option.rectView ){
 
     $('.inputForm input').on('change', function() {
         if (this.getAttribute('data-check') !== 'exclusion') {
-            cc.options[this.className] = this.value;
+          if (this.type !== 'checkbox') {
+              cc.options[this.className] = this.value;
+          } else {
+              cc.options[this.className] = this.checked;
+          }
         } else if (this.className == 'colorPattern') {
             cc.options[this.className][$('.colorPattern').index(this)] = this.value;
         } else if (this.className == 'data') {
